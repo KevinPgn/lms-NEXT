@@ -37,7 +37,7 @@ export default function Home() {
       <h2 className="text-center text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white/20 via-white to-white/20 leading-tight">Pricing Plans That Fit Your Right</h2>
       <p className="text-center text-sm text-gray-500 w-[700px] max-md:w-full mx-auto mt-1 mb-5">Grouple is a vibrant online community platform that empowerspeople to connect, collaborate, and culitivate meaningfulrelationships</p>
    
-    <div className="flex items-center gap-5 justify-center mt-7">
+    <div className="flex items-center gap-5 flex-wrap justify-center mt-7">
     <Card className="w-[300px] max-md:w-full py-3 bg-black border-white/10 min-h-[300px] text-white">
         <CardHeader>
           <CardTitle>Free</CardTitle>
