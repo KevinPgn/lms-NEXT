@@ -20,6 +20,15 @@ export const UserProfile = ({session}: {session: any}) => {
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer hover:bg-white/10">
+          <span>My Groups</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer hover:bg-white/10">
+          <span>Settings</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer hover:bg-white/10">
+          <span>Billing</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer hover:bg-white/10">
           <SignOutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
