@@ -15,9 +15,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
- 
+  courses       Course[]
+  userCourses   UserCourse[]
+  userLessons   UserLesson[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -63,17 +64,66 @@ model VerificationToken {
   @@unique([identifier, token])
 }
  
-// Optional for WebAuthn support
-model Authenticator {
-  id                   String  @id @default(cuid())
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+// LMs course education website
+model Course {
+  id String @id @default(cuid())
+  title String
+  description String
+  image String?
+  category String
+  price Int
+  rating Int @default(0)
+  status String @default("draft")
+  
+  instructorId String
+  instructor User @relation(fields: [instructorId], references: [id])
+
+  lessons Lesson[]
+  users UserCourse[]
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id String @id @default(cuid())
+  title String
+  content String
+  free Boolean @default(false)
+  videoUrl String?
+  status String @default("draft")
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id])
+
+  users UserLesson[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserCourse {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserLesson {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id])
+
+  lessonId String
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+
+  isCompleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
