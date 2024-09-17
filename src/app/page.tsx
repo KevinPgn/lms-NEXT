@@ -32,7 +32,8 @@ export default function Home() {
 
     {/* Section Pricing */}
   
-    <section className="mt-20 max-w-[1400px] mx-auto mb-10">
+    <section className="mt-40 max-w-[1400px] mx-auto mb-10 relative">
+      <div className="absolute w-[500px] h-[200px] bg-white/10 left-1/3 -translate-x-1/2 -top-10 -z-10 opacity-50 rounded-full blur-xl"></div>
       <h2 className="text-center text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white/20 via-white to-white/20 leading-tight">Pricing Plans That Fit Your Right</h2>
       <p className="text-center text-sm text-gray-500 w-[700px] mx-auto mt-1 mb-5">Grouple is a vibrant online community platform that empowerspeople to connect, collaborate, and culitivate meaningfulrelationships</p>
    
