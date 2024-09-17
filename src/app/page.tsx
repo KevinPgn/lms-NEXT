@@ -1,6 +1,8 @@
 import { Headers } from "@/features/headers/Headers"
 import Image from "next/image"
 import {Plus} from "lucide-react"
+import {Card, CardContent, CardHeader, CardTitle, CardDescription} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 export default function Home() {
   return (
@@ -27,6 +29,34 @@ export default function Home() {
         <Image src="/dashboard-snippet.png" alt="hero" width={1000} height={1000} className="mx-auto" />
       </div>
     </main>
+
+    {/* Section Pricing */}
+  
+    <section className="mt-20 max-w-[1400px] mx-auto mb-10">
+      <h2 className="text-center text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white/20 via-white to-white/20 leading-tight">Pricing Plans That Fit Your Right</h2>
+      <p className="text-center text-sm text-gray-500 w-[700px] mx-auto mt-1 mb-5">Grouple is a vibrant online community platform that empowerspeople to connect, collaborate, and culitivate meaningfulrelationships</p>
+   
+    <div className="flex items-center gap-5 justify-center mt-7">
+      <Card className="w-[300px] py-3 bg-black border-white/10 min-h-[300px] text-white">
+        <CardHeader>
+          <CardTitle>99$/month</CardTitle>
+          <CardDescription>For small communities</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button className="w-full mb-10 rounded-full">Start For Free</Button>
+          <h3 className="text-md text-gray-500 font-semibold mb-2">Features</h3>
+          <ul className="list-disc list-inside">
+            <li>Unlimited members</li>
+            <li>Unlimited posts</li>
+            <li>Unlimited comments</li>
+            <li>Unlimited comments</li>
+            <li>Unlimited comments</li>
+            <li>Unlimited comments</li>
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+    </section>
   </>
   );
 }
