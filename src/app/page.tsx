@@ -38,19 +38,38 @@ export default function Home() {
       <p className="text-center text-sm text-gray-500 w-[700px] max-md:w-full mx-auto mt-1 mb-5">Grouple is a vibrant online community platform that empowerspeople to connect, collaborate, and culitivate meaningfulrelationships</p>
    
     <div className="flex items-center gap-5 justify-center mt-7">
+    <Card className="w-[300px] max-md:w-full py-3 bg-black border-white/10 min-h-[300px] text-white">
+        <CardHeader>
+          <CardTitle>Free</CardTitle>
+          <CardDescription>For small communities</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Button className="w-full hover:bg-white hover:text-black bg-white/10 mb-10 rounded-full">Start For Free</Button>
+          <h3 className="text-md text-gray-500 font-semibold mb-2">Features</h3>
+          <ul className="list-disc list-inside">
+            <li>Unlimited members</li>
+            <li>Unlimited posts</li>
+            <li>Unlimited comments</li>
+            <li>2 Groups</li>
+            <li>Unlimited comments</li>
+            <li>Unlimited comments</li>
+          </ul>
+        </CardContent>
+      </Card>
+      
       <Card className="w-[300px] max-md:w-full py-3 bg-black border-white/10 min-h-[300px] text-white">
         <CardHeader>
           <CardTitle>99$/month</CardTitle>
           <CardDescription>For small communities</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button className="w-full mb-10 rounded-full">Start For Free</Button>
+          <Button className="w-full hover:bg-white hover:text-black bg-white/10 mb-10 rounded-full">Start With Premium Features</Button>
           <h3 className="text-md text-gray-500 font-semibold mb-2">Features</h3>
           <ul className="list-disc list-inside">
             <li>Unlimited members</li>
             <li>Unlimited posts</li>
             <li>Unlimited comments</li>
-            <li>Unlimited comments</li>
+            <li>Unlimited groups</li>
             <li>Unlimited comments</li>
             <li>Unlimited comments</li>
           </ul>
