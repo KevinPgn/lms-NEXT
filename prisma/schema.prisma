@@ -15,12 +15,10 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]
-  comments      Comment[]
-  groups        Group[]
-  members       Member[]
-  likes         Like[]
-  lessonProgress LessonProgress[]
+  courses       Courses[]
+  members       Members[]
+  completedLessons CompletedLessons[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -66,141 +64,67 @@ model VerificationToken {
   @@unique([identifier, token])
 }
  
-// LMs course education website
-model Group {
+model Courses {
   id String @id @default(cuid())
-  title String
-  content String?
-  image String?
-  videoUrl String?
-  price Int?
-
-  ownerId String
-  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-
-  channels Channel[]
-  courses Course[]
-  members Member[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Channel {
-  id String @id @default(cuid())
-  title String
-
-  posts Post[]
-
-  groupId String
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Post {
-  id String @id @default(cuid())
-  title String
-  content String
-  image String?
-
-  authorId String
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-
-  channelId String
-  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
-
-  comments Comment[]
-  likes Like[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Comment {
-  id String @id @default(cuid())
-  content String
-
-  authorId String
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-
-  postId String
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Like {
-  id String @id @default(cuid())
-  authorId String
-  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
-
-  postId String
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([authorId, postId])
-}
-
-model Course {
-  id String @id @default(cuid())
-  name String
+  title String?
   description String?
   image String?
+  category String?
+  price Int? @default(0)
   published Boolean @default(false)
+  rating Int @default(0)
 
-  groupId String
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  creatorId String
+  creator User @relation(fields: [creatorId], references: [id], onDelete: Cascade)
 
-  lessons Lesson[]
+  members Members[]
+  lessons Lessons[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Lesson {
+model Members {
+  id String @id @default(cuid())
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  coursesId String
+  courses Courses @relation(fields: [coursesId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, coursesId])
+}
+
+model Lessons {
   id String @id @default(cuid())
   title String
-  content String?
-  videoUrl String?
+  content String
+  video String?
+  free Boolean @default(false)
 
-  courseId String
-  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  coursesId String
+  courses Courses @relation(fields: [coursesId], references: [id], onDelete: Cascade)
 
-  progress LessonProgress[]
+  completedBy CompletedLessons[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt 
 }
 
-model LessonProgress {
+model CompletedLessons {
   id String @id @default(cuid())
-  completed Boolean @default(false)
 
   userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   lessonId String
-  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lesson Lessons @relation(fields: [lessonId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
+  completedAt DateTime @default(now())
+  
   @@unique([userId, lessonId])
-}
-
-model Member {
-  id String @id @default(cuid())
-  userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  groupId String
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
