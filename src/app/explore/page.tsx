@@ -1,3 +1,4 @@
+import { Categories } from '@/features/headersExplore/Categories'
 import { HeadersExplore } from '@/features/headersExplore/HeadersExplore'
 import { SearchGroups } from '@/features/headersExplore/SearchGroups'
 import React from 'react'
@@ -12,7 +13,7 @@ const PageExplore = () => {
           <span className='text-center flex items-center gap-1 justify-center text-sm text-gray-500'>or <span className='underline cursor-pointer'>create your own</span></span>
           
           <SearchGroups />
-
+          <Categories />
         </section>
     </div>
   )
