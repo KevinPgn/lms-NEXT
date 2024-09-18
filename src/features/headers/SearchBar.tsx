@@ -1,0 +1,10 @@
+"use client"
+import { Search } from "lucide-react"
+import { Input } from "@/components/ui/input"
+
+export const SearchBar = () => {
+  return <div className="flex items-center w-[350px] bg-blue-50 dark:bg-gray-900 rounded-full gap-2 px-3 py-1">
+    <Search className="w-5 h-5 text-gray-500 cursor-pointer" />
+    <Input className="border-0 focus:ring-0 bg-transparent" placeholder="Search for a course" />
+  </div>
+}
