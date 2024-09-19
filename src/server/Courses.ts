@@ -2,6 +2,7 @@
 import prisma from "@/lib/prisma"
 import {z} from "zod"
 import { authenticatedAction } from "@/lib/safe-actions"
+import { getSession } from "@/components/utils/CacheSession"
 /*
 model Courses {
   id String @id @default(cuid())
@@ -71,7 +72,10 @@ model CompletedLessons {
 */
 
 export const getFilteredCoursesPublished = async (category?: string, search?: string) => {
-    const courses = await prisma.courses.findMany({
+  const session = await getSession()
+  const userId = session?.user?.id
+
+  const courses = await prisma.courses.findMany({
         where: {
             published: true,
             ...(category && category !== "All" ? { category } : {}),
@@ -89,6 +93,14 @@ export const getFilteredCoursesPublished = async (category?: string, search?: st
                 select: {
                     lessons: true
                 }
+            },
+            members: {
+                where: {
+                    userId
+                },
+                select: {
+                  userId: true,
+                }
             }
         },
         take: 20,
@@ -97,5 +109,8 @@ export const getFilteredCoursesPublished = async (category?: string, search?: st
         }
     })
 
-    return courses
+    return courses.map(course => ({
+      ...course,
+      isMember: course.members.length > 0,
+    }))
 }
