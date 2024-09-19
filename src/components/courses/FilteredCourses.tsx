@@ -1,5 +1,6 @@
 import { getFilteredCoursesPublished } from "@/server/Courses"
 import { CourseCard } from "@/components/courses/CourseCard"
+import { NoCoursesFind } from "./NoCoursesFind"
 
 interface FilteredCoursesProps {
     category?: string
@@ -11,7 +12,7 @@ export async function FilteredCourses({ category, search }: FilteredCoursesProps
 
     return (
         <div className="flex flex-wrap gap-5 p-5">
-            {courses.length === 0 ? <div className="text-center flex items-center justify-center text-gray-500">No courses found</div> : courses.map((course) => (
+            {courses.length === 0 ? <NoCoursesFind /> : courses.map((course) => (
                 <CourseCard key={course.id} course={course} />
             ))}
         </div>
