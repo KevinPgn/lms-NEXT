@@ -13,7 +13,7 @@ export default async function Home() {
     <div className="flex">
       <SidebarHome />
 
-      <main className="flex flex-col flex-1">
+      <main className="flex flex-col overflow-y-auto flex-1">
         <HeadersHome session={session} />
         <Categories />
         <div className="flex flex-wrap gap-5 p-5">

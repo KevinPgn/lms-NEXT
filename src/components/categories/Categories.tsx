@@ -23,7 +23,7 @@ export const Categories = () => {
   const searchParams = useSearchParams()
   const categoryParams = searchParams.get("category")
   return <>
-    <div className="flex items-center p-5 gap-5">
+    <div className="flex items-center p-5 gap-5 overflow-x-auto">
         {categories.map((category, index) => (
             <Button
                 key={index}

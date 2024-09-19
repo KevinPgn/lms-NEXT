@@ -73,7 +73,7 @@ model CompletedLessons {
 export const getCoursesPublished = async () => {
     const courses = await prisma.courses.findMany({
         where: {
-            published: true
+            published: true,
         },
         select: {
             id: true,
@@ -88,6 +88,10 @@ export const getCoursesPublished = async () => {
                     lessons: true
                 }
             }
+        },
+        take: 20,
+        orderBy: {
+            createdAt: "desc"
         }
     })
 

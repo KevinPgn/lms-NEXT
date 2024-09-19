@@ -1,6 +1,8 @@
+"use client"
 import { BookOpen } from "lucide-react"
 
 export const CourseCard = ({course}: {course: any}) => {
+
   return <div className="w-[300px] p-3 rounded-lg border border-gray-200 dark:border-gray-800 cursor-pointer">
     <div className="w-full h-[150px] bg-pink-400 rounded-lg"></div>
 
