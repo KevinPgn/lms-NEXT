@@ -1,4 +1,4 @@
-import { getCoursesPublished } from "@/server/Courses"
+import { getFilteredCoursesPublished } from "@/server/Courses"
 import { CourseCard } from "@/components/courses/CourseCard"
 
 interface FilteredCoursesProps {
@@ -6,7 +6,7 @@ interface FilteredCoursesProps {
 }
 
 export async function FilteredCourses({ category }: FilteredCoursesProps) {
-    const courses = await getCoursesPublished(category)
+    const courses = await getFilteredCoursesPublished(category)
 
     return (
         <div className="flex flex-wrap gap-5 p-5">

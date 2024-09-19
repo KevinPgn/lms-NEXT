@@ -70,7 +70,7 @@ model CompletedLessons {
 
 */
 
-export const getCoursesPublished = async (category?: string) => {
+export const getFilteredCoursesPublished = async (category?: string) => {
     const courses = await prisma.courses.findMany({
         where: {
             published: true,

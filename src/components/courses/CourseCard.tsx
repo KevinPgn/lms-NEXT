@@ -1,4 +1,3 @@
-"use client"
 import { BookOpen } from "lucide-react"
 
 export const CourseCard = ({course}: {course: any}) => {

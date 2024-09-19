@@ -2,12 +2,10 @@ import { HeadersHome } from "@/features/headers/HeadersHome";
 import { SidebarHome } from "@/features/sidebar/SidebarHome";
 import { getSession } from "@/components/utils/CacheSession";
 import { Categories } from "@/components/categories/Categories";
-import { getCoursesPublished } from "@/server/Courses";
-import { FilteredCourses } from "@/server/FilteredCourses";
+import { FilteredCourses } from "@/components/courses/FilteredCourses";
 
 export default async function Home({searchParams}: {searchParams: {category: string}}) {
   const session = await getSession()
-  const courses = await getCoursesPublished()
 
   return (
     <div className="flex">
