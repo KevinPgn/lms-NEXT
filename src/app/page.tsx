@@ -3,9 +3,9 @@ import { SidebarHome } from "@/features/sidebar/SidebarHome";
 import { getSession } from "@/components/utils/CacheSession";
 import { Categories } from "@/components/categories/Categories";
 import { getCoursesPublished } from "@/server/Courses";
-import { CourseCard } from "@/components/courses/CourseCard";
+import { FilteredCourses } from "@/server/FilteredCourses";
 
-export default async function Home() {
+export default async function Home({searchParams}: {searchParams: {category: string}}) {
   const session = await getSession()
   const courses = await getCoursesPublished()
 
@@ -17,9 +17,7 @@ export default async function Home() {
         <HeadersHome session={session} />
         <Categories />
         <div className="flex flex-wrap gap-5 p-5">
-          {courses.map((course: any) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
+          <FilteredCourses category={searchParams.category} />
         </div>
       </main>
     </div>
