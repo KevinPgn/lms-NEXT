@@ -3,10 +3,11 @@ import { CourseCard } from "@/components/courses/CourseCard"
 
 interface FilteredCoursesProps {
     category?: string
+    search?: string
 }
 
-export async function FilteredCourses({ category }: FilteredCoursesProps) {
-    const courses = await getFilteredCoursesPublished(category)
+export async function FilteredCourses({ category, search }: FilteredCoursesProps) {
+    const courses = await getFilteredCoursesPublished(category, search)
 
     return (
         <div className="flex flex-wrap gap-5 p-5">

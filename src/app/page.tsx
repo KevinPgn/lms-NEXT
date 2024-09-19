@@ -4,7 +4,7 @@ import { getSession } from "@/components/utils/CacheSession";
 import { Categories } from "@/components/categories/Categories";
 import { FilteredCourses } from "@/components/courses/FilteredCourses";
 
-export default async function Home({searchParams}: {searchParams: {category: string}}) {
+export default async function Home({searchParams}: {searchParams: {category: string, search: string}}) {
   const session = await getSession()
 
   return (
@@ -15,7 +15,7 @@ export default async function Home({searchParams}: {searchParams: {category: str
         <HeadersHome session={session} />
         <Categories />
         <div className="flex flex-wrap gap-5 p-5">
-          <FilteredCourses category={searchParams.category} />
+          <FilteredCourses category={searchParams.category} search={searchParams.search} />
         </div>
       </main>
     </div>

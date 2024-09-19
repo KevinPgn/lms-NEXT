@@ -70,11 +70,12 @@ model CompletedLessons {
 
 */
 
-export const getFilteredCoursesPublished = async (category?: string) => {
+export const getFilteredCoursesPublished = async (category?: string, search?: string) => {
     const courses = await prisma.courses.findMany({
         where: {
             published: true,
-            ...(category && category !== "All" ? { category } : {})
+            ...(category && category !== "All" ? { category } : {}),
+            ...(search ? { title: { contains: search } } : {})
         },
         select: {
             id: true,
