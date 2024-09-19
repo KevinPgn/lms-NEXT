@@ -2,18 +2,20 @@
 import {useRouter} from "next/navigation"
 import { Button } from "@/components/ui/button"
 import {useSearchParams} from "next/navigation"
+import { ScreenShare, Computer, Smartphone, Brain, Film, Camera, Mail, Briefcase } from "lucide-react"
+
 let categories: {
     name: string
+    icon: React.ReactNode
 }[] = [
-    { name: "All", },
-    { name: "Web Development", },
-    { name: "Mobile Development", },
-    { name: "Machine Learning", },
-    { name: "Software Engineering", },
-    { name: "Filming", },
-    { name: "Photography", },
-    { name: "Marketing", },
-    { name: "Business", },
+    { name: "All", icon: <ScreenShare size={16} /> },
+    { name: "Web Development", icon: <Computer size={16} /> },  
+    { name: "Mobile Development", icon: <Smartphone size={16} /> },
+    { name: "Machine Learning", icon: <Brain size={16} /> },
+    { name: "Filming", icon: <Film size={16}  /> },
+    { name: "Photography", icon: <Camera size={16} /> },
+    { name: "Marketing", icon: <Mail size={16} /> },
+    { name: "Business", icon: <Briefcase size={16} /> },
 ]
 
 export const Categories = () => {
@@ -29,7 +31,10 @@ export const Categories = () => {
                 className={`text-sm rounded-full border-gray-100 dark:border-gray-800 font-normal ${categoryParams === category.name ? "bg-orange-500 text-white" : ""}`}
                 onClick={() => router.push(`/?category=${category.name}`)}
             >
-                {category.name}
+                <span className="flex items-center gap-2">
+                    {category.icon}
+                    {category.name}
+                </span>
             </Button>
         ))}
         <span className="text-sm font-normal underline cursor-pointer text-orange-500">See More</span>
