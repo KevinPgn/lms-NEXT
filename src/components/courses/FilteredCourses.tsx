@@ -10,7 +10,7 @@ export async function FilteredCourses({ category }: FilteredCoursesProps) {
 
     return (
         <div className="flex flex-wrap gap-5 p-5">
-            {courses.map((course) => (
+            {courses.length === 0 ? <div className="text-center flex items-center justify-center text-gray-500">No courses found</div> : courses.map((course) => (
                 <CourseCard key={course.id} course={course} />
             ))}
         </div>

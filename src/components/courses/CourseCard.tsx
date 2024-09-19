@@ -2,7 +2,7 @@ import { BookOpen } from "lucide-react"
 
 export const CourseCard = ({course}: {course: any}) => {
 
-  return <div className="w-[300px] p-3 rounded-lg border border-gray-200 dark:border-gray-800 cursor-pointer">
+  return <div className="w-[300px] h-[380px] hover:scale-105 transition-all duration-300 p-3 rounded-lg border border-gray-200 dark:border-gray-800 cursor-pointer">
     <div className="w-full h-[150px] bg-pink-400 rounded-lg"></div>
 
     <h2 className="text-lg font-bold mt-2">{course.title ? course.title : "Course Title"}</h2>
@@ -22,7 +22,8 @@ export const CourseCard = ({course}: {course: any}) => {
 
     {/* Progress bar with number of pourcentage */}
     <div className="w-full h-[10px] bg-gray-200 dark:bg-gray-800 rounded-full mt-4">
-      <div className="h-full bg-blue-400 rounded-full" style={{width: `${course.progress}%`}}></div>
+      <div className="h-full bg-blue-400 rounded-full mb-1" style={{width: `${course.progress}%`}}></div>
+      <span className="text-sm text-blue-400 font-bold">0% completed</span>
     </div>
   </div>
 }
