@@ -26,7 +26,7 @@ export const Categories = () => {
             <Button
                 key={index}
                 variant={"outline"}
-                className={`text-sm rounded-full border-gray-200 dark:border-gray-800 font-normal ${categoryParams === category.name ? "bg-orange-500 text-white" : ""}`}
+                className={`text-sm rounded-full border-gray-100 dark:border-gray-800 font-normal ${categoryParams === category.name ? "bg-orange-500 text-white" : ""}`}
                 onClick={() => router.push(`/?category=${category.name}`)}
             >
                 {category.name}
