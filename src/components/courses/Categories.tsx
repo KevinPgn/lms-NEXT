@@ -10,21 +10,23 @@ export const Categories = () => {
   const router = useRouter()
 
   return (
-   <div className="flex flex-wrap py-5 px-10 items-center gap-10">
-    <Button
-    onClick={() => router.push("/course")}
-    variant={categoryParams === null ? "default" : "outline"}>
-        All
-    </Button>
-    {categories.map((category) => (
-      <Button
-      onClick={() => router.push(`/course?category=${category.name}`)}
-      key={category.name}
-      variant={categoryParams === category.name ? "default" : "outline"}
-      >
-        {category.name}
-      </Button>
-    ))}
+   <div className="flex flex-wrap py-5 items-center justify-between">
+    <div className="flex items-center gap-5">
+        <Button
+        onClick={() => router.push("/course")}
+        variant={categoryParams === null ? "default" : "outline"}>
+            All
+        </Button>
+        {categories.map((category) => (
+        <Button
+        onClick={() => router.push(`/course?category=${category.name}`)}
+        key={category.name}
+        variant={categoryParams === category.name ? "default" : "outline"}
+        >
+            {category.name}
+        </Button>
+        ))}
+    </div>
 
     <CircleEllipsis size={20} className="cursor-pointer"/>
    </div>
