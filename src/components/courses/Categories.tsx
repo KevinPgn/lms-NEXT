@@ -2,6 +2,7 @@
 import categories from "@/features/data/Categories"
 import {useSearchParams, useRouter} from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { CircleEllipsis } from "lucide-react"
 
 export const Categories = () => {
   const searchParams = useSearchParams()
@@ -24,6 +25,8 @@ export const Categories = () => {
         {category.name}
       </Button>
     ))}
+
+    <CircleEllipsis size={20} className="cursor-pointer"/>
    </div>
   )
 }
