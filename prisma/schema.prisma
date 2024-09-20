@@ -15,9 +15,11 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  courses       Courses[]
-  members       Members[]
-  completedLessons CompletedLessons[]
+  courses       Course[]
+  wishlistItems WishlistItem[]
+  ratings Rating[]
+  enrolledCourses EnrolledCourse[]
+  lessonProgress LessonProgress[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -63,68 +65,116 @@ model VerificationToken {
  
   @@unique([identifier, token])
 }
- 
-model Courses {
-  id String @id @default(cuid())
-  title String?
-  description String?
-  image String?
-  category String?
-  price Int? @default(0)
-  published Boolean @default(false)
-  rating Int @default(0)
 
-  creatorId String
-  creator User @relation(fields: [creatorId], references: [id], onDelete: Cascade)
-
-  members Members[]
-  lessons Lessons[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Members {
-  id String @id @default(cuid())
-
-  userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  coursesId String
-  courses Courses @relation(fields: [coursesId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@unique([userId, coursesId])
-}
-
-model Lessons {
+model Course {
   id String @id @default(cuid())
   title String
-  content String
-  video String?
-  free Boolean @default(false)
+  description String
+  category String
+  image String?
+  price Int 
+  language String
+  public Boolean @default(false)
 
-  coursesId String
-  courses Courses @relation(fields: [coursesId], references: [id], onDelete: Cascade)
+  levels Level[]
+  wishlistItems WishlistItem[]
+  ratings Rating[]
+  lessons Lesson[]
+  enrolledUsers EnrolledCourse[]
 
-  completedBy CompletedLessons[]
+  instructorId String
+  instructor User @relation(fields: [instructorId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt 
+  updatedAt DateTime @updatedAt
 }
 
-model CompletedLessons {
+model Level {
   id String @id @default(cuid())
+  name String // beginner, intermediate, advanced
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WishlistItem {
+  id String @id @default(cuid())
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  lessonId String
-  lesson Lessons @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  completedAt DateTime @default(now())
-  
+  @@unique([userId, courseId])
+}
+
+model Lesson {
+  id String @id @default(cuid())
+  title String
+  description String
+  videoUrl String?
+
+  lessonProgress LessonProgress[]
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model LessonProgress {
+  id String @id @default(cuid())
+  lessonId String
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  isCompleted Boolean @default(false)
+  completedAt DateTime?
+  lastAccessedAt DateTime @default(now())
+  progress Float @default(0) // 0 to 1
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@unique([userId, lessonId])
+}
+
+model Rating {
+  id String @id @default(cuid())
+  rating Int
+  comment String?
+
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, courseId])
+}
+
+model EnrolledCourse {
+  id String @id @default(cuid())
+  courseId String
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, courseId])
 }
