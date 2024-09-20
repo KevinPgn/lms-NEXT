@@ -12,13 +12,13 @@ const categories = [
         name: "Video Editing",
     },
     {
-        name: "Marketing",
+        name: "Game Maker",
     },
     {
         name: "Business",
     },
     {
-        name: "Finance",
+        name: "AI",
     },
     {
         name: "Music",
