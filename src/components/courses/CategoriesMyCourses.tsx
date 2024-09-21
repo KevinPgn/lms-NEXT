@@ -11,9 +11,10 @@ export const CategoriesMyCourses = () => {
 
   return (
    <div className="flex flex-wrap py-5 items-center justify-between">
-    <div className="flex items-center gap-5">
+    <div className="flex flex-wrap items-center max-xl:mb-3 gap-5">
         <Button
         onClick={() => router.push("/mycourses")}
+
         variant={categoryParams === null ? "default" : "outline"}>
             All
         </Button>
@@ -31,4 +32,5 @@ export const CategoriesMyCourses = () => {
     <CircleEllipsis size={20} className="cursor-pointer"/>
    </div>
   )
+
 }

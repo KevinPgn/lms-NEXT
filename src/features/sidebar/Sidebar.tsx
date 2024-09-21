@@ -8,7 +8,7 @@ import { SignOutButton } from "../auth/SignOutButton"
 export const Sidebar = async () => {
   const session = await getSession()
 
-  return <div className="w-60 p-2 bg-white flex flex-col justify-between dark:bg-[#080808] shadow-lg py-3 h-screen sticky top-0">
+  return <div className="w-60 p-2 max-sm:hidden bg-white flex flex-col justify-between dark:bg-[#080808] shadow-lg py-3 h-screen sticky top-0">
     <div className="flex flex-col gap-2">
         <Link href="/" className="flex items-center gap-2 px-3">
         <div className="w-9 h-9 rounded-xl bg-black dark:bg-white flex items-center justify-center">

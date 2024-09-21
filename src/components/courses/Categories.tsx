@@ -10,8 +10,8 @@ export const Categories = () => {
   const router = useRouter()
 
   return (
-   <div className="flex flex-wrap py-5 items-center justify-between">
-    <div className="flex items-center gap-5">
+   <div className="flex py-5 items-center flex-wrap justify-between">
+    <div className="flex flex-wrap items-center gap-5">
         <Button
         onClick={() => router.push("/course")}
         variant={categoryParams === null ? "default" : "outline"}>
