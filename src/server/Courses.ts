@@ -172,3 +172,61 @@ export const getFilteredCourses = async (category?: string) => {
     totalCount,
   };
 };
+
+// Get all courses created by the user, like the getFilteredCourses but for the instructor
+export const getInstructorCourses = authenticatedAction
+  .schema(z.object({
+    category: z.string().optional(),
+  }))
+  .action(async ({parsedInput: {category}, ctx:{userId}}) => {
+    const courses = await prisma.course.findMany({
+      where: {
+        category: category,
+        instructorId: userId,
+      },
+      select: {
+        id: true,
+        title: true,
+        image: true,
+        price: true,
+        createdAt: true,
+        levels: {
+          select: {
+            name: true,
+          }
+        },
+        instructor: {
+          select: {
+            id: true,
+            name: true,
+            image: true,
+          }
+        },
+        _count: {
+          select: {
+            ratings: true,
+            enrolledUsers: true,
+          }
+        },
+        ratings: {
+          select: {
+            rating: true,
+          }
+        },
+      },
+      take: 10,
+      orderBy: { createdAt: 'desc' },
+    });
+
+    const coursesWithAverageRating = courses.map(course => ({
+      ...course,
+      averageRating: course.ratings.length > 0
+        ? course.ratings.reduce((sum, r) => sum + r.rating, 0) / course.ratings.length
+        : 0,
+    }));
+
+    return {
+      courses: coursesWithAverageRating,
+      totalCount: courses.length,
+    };
+  });
