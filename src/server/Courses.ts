@@ -90,6 +90,8 @@ export const getCourses = async (category?: string) => {
             image: true,
             price: true,
             levels: true,          
+            category: true,
+            authorId: true,
             purchases: {
                 where: {
                     userId: userId ?? undefined
