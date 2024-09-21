@@ -20,7 +20,7 @@ export default async function Home({searchParams}: {searchParams: {category: str
           {courses.length === 0 ? (
             <p className="text-center text-gray-500">No courses found</p>
           ) : (
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap justify-center gap-8">
               {courses.map((course) => (
                 <Course key={course.id} course={course} session={session}/>
               ))}
