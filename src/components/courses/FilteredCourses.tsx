@@ -3,7 +3,7 @@ import { BriefcaseBusiness, Users2, Star, Heart } from "lucide-react"
 export const FilteredCourses = ({course}: {course: any}) => {
   const levelname = course.levels[0]?.name || 'Unknown'
 
-  return <div className="w-[350px] rounded-md shadow-md">
+  return <div className="w-[350px] rounded-md dark:border dark:border-gray-700 shadow-md">
       <div className="w-full h-[200px] bg-purple-300 rounded-t-md relative group">
         <div className="absolute hidden top-2 right-2 cursor-pointer bg-[#FBA90D] rounded-full p-2 group-hover:flex">
         <Heart size={25} className="text-white fill-white" />
