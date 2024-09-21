@@ -12,7 +12,7 @@ export default async function Home() {
 
       <main className="flex-1">
         <Headers session={session}/>
-        <div className="flex flex-col gap-4 p-3 mt-4">
+        <div className="flex flex-col gap-4 p-3 mt-2">
           <Categories />
         </div>
       </main>
