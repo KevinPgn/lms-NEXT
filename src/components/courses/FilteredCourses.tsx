@@ -1,11 +1,16 @@
-import { BriefcaseBusiness, Users2, Star } from "lucide-react"
+import { BriefcaseBusiness, Users2, Star, Heart } from "lucide-react"
 
 export const FilteredCourses = ({course}: {course: any}) => {
   const levelname = course.levels[0]?.name || 'Unknown'
 
-  return <div className="w-[350px] cursor-pointer hover:scale-105 transition-all duration-300 rounded-md shadow-md">
-      <div className="w-full h-[200px] bg-purple-300 rounded-t-md"></div>
-      <h2 className="text-xl p-4 font-bold">{course.title}</h2>
+  return <div className="w-[350px] rounded-md shadow-md">
+      <div className="w-full h-[200px] bg-purple-300 rounded-t-md relative group">
+        <div className="absolute hidden top-2 right-2 cursor-pointer bg-[#FBA90D] rounded-full p-2 group-hover:flex">
+        <Heart size={25} className="text-white fill-white" />
+        </div>
+      </div>
+
+      <h2 className="text-xl p-4 font-bold cursor-pointer">{course.title}</h2>
 
       <div className="flex items-center gap-2 p-2 justify-around">
         <div className="flex items-center gap-2">
@@ -25,7 +30,7 @@ export const FilteredCourses = ({course}: {course: any}) => {
           <div className="flex items-center justify-center border border-gray-200 dark:border-gray-700 rounded-full p-2">
             <Users2 size={16} />
           </div>
-          <p>{course.enrolledUsers.length}</p>
+          <p>{course._count.enrolledUsers}</p>
         </div>
 
         <div className="flex items-center gap-2">

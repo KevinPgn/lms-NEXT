@@ -1,5 +1,5 @@
 "use client"
-import {Sparkles, CircleArrowUp, Monitor, Zap, Users2} from "lucide-react"
+import {Sparkles, CircleArrowUp, Monitor, Zap, Users2, Heart} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -28,8 +28,14 @@ export const Links = ({session}: {session: any}) => {
         <Zap className={`w-5 h-5 text-gray-500 ${pathname === "/learningprogress" ? "text-black dark:text-white" : ""}`} />
         Learning Progress
     </Link>
+
+    <Link href="/myfavorites" className={`flex items-center gap-2 text-md text-black dark:text-white p-2 px-5 rounded-md hover:bg-gray-100 duration-75 dark:hover:bg-white/10 ${pathname === "/myfavorites" ? "bg-gray-100 dark:bg-white/10 dark:text-white" : ""}`}>
+        <Heart className={`w-5 h-5 text-gray-500 ${pathname === "/myfavorites" ? "text-black dark:text-white" : ""}`} />
+        My Favorites
+    </Link>
     </>
     ): null}
+
 
     <Link href="/community" className={`flex items-center gap-2 text-md text-black dark:text-white p-2 px-5 rounded-md hover:bg-gray-100 duration-75 dark:hover:bg-white/10 ${pathname === "/community" ? "bg-gray-100 dark:bg-white/10 dark:text-white" : ""}`}>
         <Users2 className={`w-5 h-5 text-gray-500 ${pathname === "/community" ? "text-black dark:text-white" : ""}`} />

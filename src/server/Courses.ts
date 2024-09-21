@@ -151,12 +151,6 @@ export const getFilteredCourses = async (category?: string) => {
             enrolledUsers: true,
           }
         },
-        ...(userId ? {
-          enrolledUsers: {
-            where: { userId },
-            select: { id: true },
-          }
-        } : {}),
         ratings: {
           select: {
             rating: true,
@@ -173,8 +167,7 @@ export const getFilteredCourses = async (category?: string) => {
     ...course,
     averageRating: course.ratings.length > 0
       ? course.ratings.reduce((sum, r) => sum + r.rating, 0) / course.ratings.length
-      : null,
-    isMember: course.enrolledUsers?.length > 0,
+      : 0,
   }));
 
   return {
