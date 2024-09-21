@@ -81,7 +81,7 @@ export const getCourses = async (category?: string) => {
     const courses = await prisma.course.findMany({
         where: {
             published: true,
-            category: category
+            ...(category && {category: category})
         },
         select: {
             id: true,
