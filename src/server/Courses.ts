@@ -119,9 +119,6 @@ model EnrolledCourse {
 */
 
 export const getFilteredCourses = async (category?: string) => {
-  const session = await getSession();
-  const userId = session?.user?.id;
-  
   const where = category ? { category } : {};
   
   const [courses, totalCount] = await prisma.$transaction([
