@@ -1,7 +1,7 @@
 import {BookOpenIcon} from "lucide-react"
 
 export const Course = ({course, session}: {course: any, session: any}) => {
-  return <div className="w-[320px] rounded-md border border-gray-200 dark:border-gray-700 dark:bg-gray-800 p-3">
+  return <div className="w-[320px] cursor-pointer hover:scale-105 transition-all duration-300 rounded-md border border-gray-200 dark:border-gray-700 dark:bg-gray-800 p-3">
     {course.image ? (
         <img src={course.image} alt={course.title} className="w-full h-40 object-cover rounded-md" />
     ) : (
