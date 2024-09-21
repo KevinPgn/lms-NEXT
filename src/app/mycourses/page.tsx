@@ -1,8 +1,9 @@
 import React from 'react'
 import { getInstructorCourses } from '@/server/Courses'
-import { FilteredCourses } from '@/components/courses/FilteredCourses'
+import { Courses } from '@/components/courses/Courses'
 import { NoCoursesFind } from '@/components/courses/NoCoursesFind'
 import { SearchBar } from '@/components/courses/SearchBar'
+
 import { CategoriesMyCourses } from '@/components/courses/CategoriesMyCourses'
 
 export const metadata = {
@@ -22,9 +23,10 @@ const MyCoursesPage = async ({searchParams}: {searchParams: {category: string}})
         <h1 className='text-2xl font-bold mb-5'>Total Courses in {searchParams.category ? searchParams.category : 'total'}: {resultData?.totalCount}</h1>
         <div className='flex flex-wrap gap-5'>
           {resultData?.courses && resultData?.courses.length > 0 ? resultData?.courses.map((course: any) => (
-            <FilteredCourses key={course.id} course={course} />
+            <Courses key={course.id} course={course} />
           )) : <NoCoursesFind />}
         </div>
+
       </main>
 
     </section>

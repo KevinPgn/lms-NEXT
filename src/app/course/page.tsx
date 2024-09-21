@@ -1,7 +1,8 @@
 import { Categories } from '@/components/courses/Categories'
-import { FilteredCourses } from '@/components/courses/FilteredCourses'
+import { Courses } from '@/components/courses/Courses'
 import { SearchBar } from '@/components/courses/SearchBar'
 import React from 'react'
+
 import { getFilteredCourses } from '@/server/Courses'
 import { NoCoursesFind } from '@/components/courses/NoCoursesFind'
 
@@ -21,9 +22,10 @@ const CoursesPage = async ({searchParams}: {searchParams: {category: string}}) =
         <h1 className='text-2xl font-bold mb-5'>Total Courses in {searchParams.category ? searchParams.category : 'total'}: {totalCount}</h1>
         <div className='flex flex-wrap gap-5'>
           {courses.length > 0 ? courses.map((course: any) => (
-            <FilteredCourses key={course.id} course={course} />
+            <Courses key={course.id} course={course} />
           )) : <NoCoursesFind />}
         </div>
+
       </main>
 
     </section>

@@ -1,7 +1,8 @@
 import { BriefcaseBusiness, Users2, Star, Heart } from "lucide-react"
 
-export const FilteredCourses = ({course}: {course: any}) => {
+export const Courses = ({course}: {course: any}) => {
   const levelname = course.levels[0]?.name || 'Unknown'
+
 
   return <div className="w-[350px] rounded-md dark:border dark:border-gray-700 shadow-md">
       <div className="w-full h-[200px] bg-purple-300 rounded-t-md relative group">
