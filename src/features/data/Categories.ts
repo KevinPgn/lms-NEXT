@@ -1,27 +1,27 @@
 const categories = [
     {
+        name: "Accounting",
+    },
+    {
         name: "Web Development",
     },
     {
-        name: "Photography",
+        name: "Engineering",
     },
     {
-        name: "Graphic Design",
+        name: "Filming",
     },
     {
-        name: "Video Editing",
+        name: "Fitness",
     },
     {
-        name: "Game Maker",
-    },
-    {
-        name: "Business",
+        name: "Music",
     },
     {
         name: "AI",
     },
     {
-        name: "Music",
+        name: "Photography",
     }
 ]
 
