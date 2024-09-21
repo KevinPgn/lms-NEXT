@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { Sidebar } from "@/features/sidebar/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,12 +24,7 @@ export default function RootLayout({
           defaultTheme="light"
         >
           <SessionProvider>
-            <div className="flex">
-              <Sidebar />
-              <div className="flex-1">
-                {children}
-              </div>
-            </div>
+              {children}
           </SessionProvider>
         </ThemeProvider>
       </body>
