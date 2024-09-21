@@ -16,13 +16,16 @@ const CoursesPage = async ({searchParams}: {searchParams: {category: string}}) =
     <section className='p-5'>
       <SearchBar />
       <Categories />
-      <main>
-        <h1 className='text-2xl font-bold mb-5'>Total Courses: {totalCount}</h1>
-        {courses.map((course: any) => (
-          <FilteredCourses key={course.id} course={course} />
-        ))}
+      <main >
+        <h1 className='text-2xl font-bold mb-5'>Total Courses in {searchParams.category ? searchParams.category : 'total'}: {totalCount}</h1>
+        <div className='flex flex-wrap gap-5'>
+          {courses.map((course: any) => (
+            <FilteredCourses key={course.id} course={course} />
+          ))}
+        </div>
       </main>
     </section>
+
   )
 }
 

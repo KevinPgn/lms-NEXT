@@ -132,9 +132,9 @@ export const getFilteredCourses = async (category?: string) => {
         title: true,
         image: true,
         price: true,
+        createdAt: true,
         levels: {
           select: {
-            id: true,
             name: true,
           }
         },
