@@ -118,3 +118,39 @@ export const getCourses = async (category?: string, search?: string) => {
         isPurchased: course.purchases.length > 0
     }))
 }
+
+// Get all courses purchases by the connected user
+export const getPurchasesCourse = authenticatedAction
+    .schema(z.object({}))
+    .action(async ({ctx:{userId}}) => {
+        const purchases = await prisma.purchase.findMany({
+            where: {
+                userId: userId ?? undefined
+            },
+            select: {
+                course: {
+                    select: {
+                        id: true,
+                        title: true,
+                        description: true,
+                        image: true,
+                        price: true,
+                        levels: true,
+                        category: true,
+                        authorId: true,
+                        _count: {
+                            select: {
+                                chapters: true
+                            }
+                        }
+                    },
+                },
+            },
+            take: 10,
+            orderBy: {
+                createdAt: "desc"
+            }
+        })
+
+        return purchases
+    })

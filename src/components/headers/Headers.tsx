@@ -9,8 +9,10 @@ export const Headers = ({session}: {session: any}) => {
   const pathname = usePathname()
 
   return <header className="p-3 px-5 h-20 border-b border-gray-200 dark:border-zinc-800">
-    <nav className="flex items-center justify-between gap-2 h-full w-full">
-        {pathname === "/" ? <SearchBar /> : null}
+    <nav className="flex items-center h-full w-full">
+        <div className={`flex ${pathname === "/" ? "justify-between" : "justify-end"} w-full`}>
+            {pathname === "/" && <SearchBar />}
+        </div>
 
         <div className="flex items-center gap-5">
             <BtnTeacherMode />
