@@ -1,7 +1,7 @@
 "use client"
 import {usePathname} from "next/navigation"
 import { SearchBar } from "./SearchBar"
-import { BtnTeacherMode } from "./BtnTeacherMode"
+import BtnTeacherMode from "./BtnTeacherMode"
 import { SignInButton } from "@/features/auth/SignInButton"
 import { UserProfile } from "@/features/auth/UserProfile"
 
