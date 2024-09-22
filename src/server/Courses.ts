@@ -106,6 +106,10 @@ export const getCourses = async (category?: string, search?: string) => {
                     chapters: true
                 }
             }
+        },
+        take: 10,
+        orderBy: {
+            createdAt: "desc"
         }
     })
 
