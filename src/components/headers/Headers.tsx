@@ -4,6 +4,7 @@ import { SearchBar } from "./SearchBar"
 import BtnTeacherMode from "./BtnTeacherMode"
 import { SignInButton } from "@/features/auth/SignInButton"
 import { UserProfile } from "@/features/auth/UserProfile"
+import { ModeToggle } from "../ui/toggledarmode"
 
 export const Headers = ({session}: {session: any}) => {
   const pathname = usePathname()
@@ -15,6 +16,7 @@ export const Headers = ({session}: {session: any}) => {
         </div>
 
         <div className="flex items-center gap-5">
+            <ModeToggle />
             {session ? <BtnTeacherMode /> : null}
             {!session ? <SignInButton /> : <UserProfile session={session}/>}
         </div>
