@@ -5,6 +5,7 @@ import { Headers } from '@/components/headers/Headers'
 import { Categories } from '@/components/categories/Categories'
 import { Course } from '@/components/courses/Course'
 import { getSession } from '@/components/utils/CacheSession'
+import { HeaderDashboard } from '@/components/dashboard/HeaderDashboard'
 
 const DashboardPage = async () => {
   const session = await getSession()
@@ -18,6 +19,7 @@ const DashboardPage = async () => {
 
     <main className="flex-1">
       <Headers session={session}/>
+      <HeaderDashboard />
       <div className="flex flex-col gap-4 p-3 mt-2">
         {courses && courses.length === 0 ? (
           <p className="text-center text-gray-500">No courses found</p>
