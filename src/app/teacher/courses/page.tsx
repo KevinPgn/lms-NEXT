@@ -4,7 +4,7 @@ import { Headers } from '@/components/headers/Headers'
 import { getSession } from '@/components/utils/CacheSession'
 import { getCreatedCourses } from '@/server/Courses'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Ellipsis } from 'lucide-react'
+import { Ellipsis } from '@/components/teacherCourses/Ellipsis'
 export const revalidate = 300 // 5 minutes
 
 export const metadata = {
@@ -24,7 +24,7 @@ const TeacherCoursesPage = async () => {
         <Headers session={session}/>
         <div className='p-5'>
             <Table className='border border-gray-200 dark:border-zinc-700'>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>A list of your recents courses.</TableCaption>
         <TableHeader>
             <TableRow>
             <TableHead className="w-[800px]">Title</TableHead>
@@ -38,9 +38,9 @@ const TeacherCoursesPage = async () => {
                         <TableRow key={course.id}>
                             <TableCell>{course.title}</TableCell>
                             <TableCell>{course.price === 0 ? 'Free' : `$${course.price}`}</TableCell>
-                            <TableCell>{course.published ? 'Published' : 'Draft'}</TableCell>
+                            <TableCell>{course.published ? <span className='bg-blue-500 text-white text-xs px-2 py-1 rounded-md'>Published</span> : <span className='bg-red-500 text-white text-xs px-2 py-1 rounded-md'>Draft</span>}</TableCell>
                             <TableCell>
-                                <Ellipsis className='w-4 h-4 cursor-pointer' />
+                                <Ellipsis courseId={course.id} />
                             </TableCell>
                         </TableRow>
                     ))}

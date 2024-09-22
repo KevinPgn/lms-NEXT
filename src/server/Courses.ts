@@ -200,8 +200,11 @@ export const getCreatedCourses = authenticatedAction
                 title: true,
                 price: true,
                 published: true,
+            },
+            take: 10,
+            orderBy: {
+                createdAt: "desc"
             }
         })
-
         return courses
     })
