@@ -185,3 +185,23 @@ export const getPurchasesCourse = authenticatedAction
     })
 
 // Get all courses created by the connected user
+export const getCreatedCourses = authenticatedAction
+    .schema(z.object({
+        search: z.string().optional()
+    }))
+    .action(async ({ctx:{userId}, parsedInput:{search}}) => {
+        const courses = await prisma.course.findMany({
+            where: {
+                authorId: userId,
+                ...(search && {title: {contains: search}})
+            },
+            select: {
+                id: true,
+                title: true,
+                price: true,
+                published: true,
+            }
+        })
+
+        return courses
+    })
