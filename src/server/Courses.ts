@@ -183,3 +183,5 @@ export const getPurchasesCourse = authenticatedAction
             progressPercentage: purchase.course.userProgress.length > 0 ? (purchase.course.userProgress.length / purchase.course._count.chapters) * 100 : 0
         }))
     })
+
+// Get all courses created by the connected user

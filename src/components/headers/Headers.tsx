@@ -15,7 +15,7 @@ export const Headers = ({session}: {session: any}) => {
         </div>
 
         <div className="flex items-center gap-5">
-            <BtnTeacherMode />
+            {session ? <BtnTeacherMode /> : null}
             {!session ? <SignInButton /> : <UserProfile session={session}/>}
         </div>
     </nav>
