@@ -7,6 +7,11 @@ import { Course } from '@/components/courses/Course'
 import { getSession } from '@/components/utils/CacheSession'
 import { HeaderDashboard } from '@/components/dashboard/HeaderDashboard'
 
+export const metadata = {
+  title: "Dashboard",
+  description: "Dashboard page",
+}
+
 const DashboardPage = async () => {
   const session = await getSession()
   const purchasesCourses = await getPurchasesCourse({})

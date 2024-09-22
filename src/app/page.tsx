@@ -5,6 +5,13 @@ import { Categories } from "@/components/categories/Categories";
 import {getCourses} from "@/server/Courses"
 import { Course } from "@/components/courses/Course";
 
+export const revalidate = 3600
+
+export const metadata = {
+  title: "Home",
+  description: "Home page",
+}
+
 export default async function Home({searchParams}: {searchParams: {category: string, search: string}}) {
   const session = await getSession()
   const category = searchParams.category as string | undefined

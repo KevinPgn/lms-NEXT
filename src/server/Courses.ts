@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma"
 import {z} from "zod"
 import { authenticatedAction } from "@/lib/safe-actions"
 import { getSession } from "@/components/utils/CacheSession"
+import {cache} from "react"
 /*
 model Course {
   id String @id @default(cuid())
@@ -74,7 +75,7 @@ model UserProgress {
 
 // Get all courses published
 
-export const getCourses = async (category?: string, search?: string) => {
+export const getCourses = cache(async (category?: string, search?: string) => {
     const session = await getSession()
     const userId = session?.user?.id
 
@@ -130,7 +131,7 @@ export const getCourses = async (category?: string, search?: string) => {
         isCompleted: course.userProgress.length > 0,
         progressPercentage: course.userProgress.length > 0 ? (course.userProgress.length / course._count.chapters) * 100 : 0
     }))
-}
+})
 
 // Get all courses purchases by the connected user
 export const getPurchasesCourse = authenticatedAction
