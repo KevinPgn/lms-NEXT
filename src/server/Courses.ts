@@ -74,14 +74,15 @@ model UserProgress {
 
 // Get all courses published
 
-export const getCourses = async (category?: string) => {
+export const getCourses = async (category?: string, search?: string) => {
     const session = await getSession()
     const userId = session?.user?.id
 
     const courses = await prisma.course.findMany({
         where: {
             published: true,
-            ...(category && {category: category})
+            ...(category && {category: category}),
+            ...(search && {title: {contains: search}})
         },
         select: {
             id: true,

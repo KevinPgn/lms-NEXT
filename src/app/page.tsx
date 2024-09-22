@@ -5,9 +5,12 @@ import { Categories } from "@/components/categories/Categories";
 import {getCourses} from "@/server/Courses"
 import { Course } from "@/components/courses/Course";
 
-export default async function Home({searchParams}: {searchParams: {category: string}}) {
+export default async function Home({searchParams}: {searchParams: {category: string, search: string}}) {
   const session = await getSession()
-  const courses = await getCourses(searchParams.category)
+  const category = searchParams.category as string | undefined
+  const search = searchParams.search as string | undefined
+  
+  const courses = await getCourses(category, search)
 
   return (
     <section className="flex">
