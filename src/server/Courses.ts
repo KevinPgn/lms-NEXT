@@ -105,7 +105,18 @@ export const getCourses = async (category?: string, search?: string) => {
                 select: {
                     chapters: true
                 }
-            }
+            },
+            ...(userId && {
+                userProgress: {
+                    where: {
+                        userId: userId,
+                        isCompleted: true
+                    },
+                    select: {
+                        id: true
+                    }
+                }
+            })
         },
         take: 10,
         orderBy: {
@@ -115,7 +126,9 @@ export const getCourses = async (category?: string, search?: string) => {
 
     return courses.map((course) => ({
         ...course,
-        isPurchased: course.purchases.length > 0
+        isPurchased: course.purchases.length > 0,
+        isCompleted: course.userProgress.length > 0,
+        progressPercentage: course.userProgress.length > 0 ? (course.userProgress.length / course._count.chapters) * 100 : 0
     }))
 }
 
@@ -138,13 +151,24 @@ export const getPurchasesCourse = authenticatedAction
                         levels: true,
                         category: true,
                         authorId: true,
+                        ...(userId && {
+                            userProgress: {
+                                where: {
+                                    userId: userId,
+                                    isCompleted: true
+                                },
+                                select: {
+                                    id: true
+                                }
+                            }
+                        }),
                         _count: {
                             select: {
                                 chapters: true
                             }
                         }
                     },
-                },
+                }
             },
             take: 10,
             orderBy: {
@@ -152,5 +176,9 @@ export const getPurchasesCourse = authenticatedAction
             }
         })
 
-        return purchases
+        return purchases.map((purchase) => ({
+            ...purchase,
+            isCompleted: purchase.course.userProgress.length > 0,
+            progressPercentage: purchase.course.userProgress.length > 0 ? (purchase.course.userProgress.length / purchase.course._count.chapters) * 100 : 0
+        }))
     })

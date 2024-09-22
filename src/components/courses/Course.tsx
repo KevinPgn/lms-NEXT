@@ -1,4 +1,5 @@
 import {BookOpenIcon} from "lucide-react"
+import { Progress } from "../ui/progress"
 
 export const Course = ({course, session}: {course: any, session: any}) => {
   return <div className="w-[320px] cursor-pointer hover:-translate-y-1 transition-all duration-300 rounded-md border border-gray-200 dark:border-gray-700 dark:bg-gray-800 p-3">
@@ -24,7 +25,10 @@ export const Course = ({course, session}: {course: any, session: any}) => {
     {!course.isPurchased && session.user.id !== course.authorId ? (
         <p className="text-md mt-3 font-bold">${course.price}</p>
     ) : (
-        <p className="text-md mt-3 font-bold">Free</p>
+        <div className="mt-3">
+            <Progress value={course.progressPercentage} />
+            <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">{course.progressPercentage}% completed</p>   
+        </div>
     )}
   </div>
 }
