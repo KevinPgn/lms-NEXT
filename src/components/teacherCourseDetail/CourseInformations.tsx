@@ -9,8 +9,8 @@ export const CourseInformations = ({course}: {course: any}) => {
   return <div className="p-7">
     <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
-            <span className="text-xl font-medium">Course Setup</span>
-            <span className="text-sm font-medium text-gray-500">Complete all fields ({fieldsCompleted}/6)</span>
+            <span className="text-2xl font-bold">Course Setup</span>
+            <span className="text-sm font-normal text-gray-500">Complete all fields ({fieldsCompleted}/6)</span>
         </div>
         <div className="flex items-center gap-4">
             <Button variant="outline" disabled={fieldsCompleted !== 6}>Publish</Button>
