@@ -20,7 +20,7 @@ export const CourseInformations = ({course}: {course: any}) => {
         </div>
     </div>
 
-    <div className="flex items-start justify-between mt-14">
+    <div className="flex items-start justify-between flex-wrap mt-14">
         <div className="w-[50%]">
             <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
