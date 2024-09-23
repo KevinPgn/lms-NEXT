@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Trash } from "lucide-react"
+import { Trash, LayoutDashboard, ListChecks } from "lucide-react"
 import {useState} from "react"
 
 export const CourseInformations = ({course}: {course: any}) => {
@@ -18,6 +18,25 @@ export const CourseInformations = ({course}: {course: any}) => {
                 <Trash className="w-4 h-4" />
             </Button>
         </div>
+    </div>
+
+    <div className="flex items-start justify-between mt-14">
+        <div className="w-[50%]">
+            <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
+                    <LayoutDashboard className="w-8 h-8 text-blue-500" />
+                </div>
+                <span className="text-xl font-bold">Customize your course</span>
+            </div>
+        </div>
+        <div className="w-[50%]">
+        <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
+                    <ListChecks className="w-8 h-8 text-blue-500" />
+                </div>
+                <span className="text-xl font-bold">Course Chapters</span>
+            </div> 
+        </div>   
     </div>
   </div>
 }
