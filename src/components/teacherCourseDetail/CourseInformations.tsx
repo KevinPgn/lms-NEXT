@@ -21,7 +21,7 @@ export const CourseInformations = ({course}: {course: any}) => {
     </div>
 
     <div className="flex items-start justify-between flex-wrap mt-14">
-        <div className="w-[50%]">
+        <div className="w-[50%] max-md:w-full">
             <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
                     <LayoutDashboard className="w-8 h-8 text-blue-500" />
@@ -29,7 +29,7 @@ export const CourseInformations = ({course}: {course: any}) => {
                 <span className="text-xl font-bold">Customize your course</span>
             </div>
         </div>
-        <div className="w-[50%]">
+        <div className="w-[50%] max-md:w-full max-md:mt-10">
         <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
                     <ListChecks className="w-8 h-8 text-blue-500" />
