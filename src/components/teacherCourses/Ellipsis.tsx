@@ -8,8 +8,10 @@ import { deleteCourse } from "@/server/Courses"
 import {ToastContainer, toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { publishCourse } from "@/server/Courses"
+import { useRouter } from "next/navigation"
 
 export const Ellipsis = ({courseId, coursePublished}: {courseId: string, coursePublished: boolean}) => {
+  const router = useRouter()
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
 
   return (
@@ -19,7 +21,7 @@ export const Ellipsis = ({courseId, coursePublished}: {courseId: string, courseP
           <EllipsisIcon className="w-4 h-4 cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push(`/teacher/courses/${courseId}`)}>
             <Edit className="w-4 h-4 mr-2" />
             Edit
           </DropdownMenuItem>
