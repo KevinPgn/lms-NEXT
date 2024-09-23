@@ -299,3 +299,30 @@ export const getCourseById = authenticatedAction
         })
         return course
     })
+
+    // Update a course by id
+    export const updateCourseById = cache(authenticatedAction
+        .schema(z.object({
+            courseId: z.string(),
+            title: z.string().optional(),
+            description: z.string().optional(),
+            image: z.string().optional(),
+            price: z.number().optional(),
+            levels: z.string().optional(),
+            category: z.string().optional(),
+            published: z.boolean().optional()
+        }))
+        .action(async ({ctx:{userId}, parsedInput:{courseId, ...data}}) => {
+            const course = await prisma.course.update({
+                where: {
+                    id: courseId,
+                    authorId: userId
+                },
+                data: {
+                   ...data
+                }
+            })
+            return course
+        })
+    )
+
