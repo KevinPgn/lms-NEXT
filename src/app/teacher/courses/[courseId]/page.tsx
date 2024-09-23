@@ -4,6 +4,7 @@ import { Headers } from '@/components/headers/Headers'
 import { getSession } from '@/components/utils/CacheSession'
 import { getCourseById } from '@/server/Courses'
 import {TriangleAlert} from "lucide-react"
+import { CourseInformations } from '@/components/teacherCourseDetail/CourseInformations'
 
 interface CoursePageProps {
     params: {
@@ -27,6 +28,8 @@ const CoursePage = async ({params}: CoursePageProps) => {
           <span className='text-sm'>This course is unpublished. It will not be visible to the students.</span>
         </div>
       ) : null}
+
+      <CourseInformations course={course?.data} />
     </main>
   </section>  
   )
