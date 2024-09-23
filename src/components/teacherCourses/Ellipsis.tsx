@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { deleteCourse } from "@/server/Courses"
 import {ToastContainer, toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { publishCourse } from "@/server/Courses"
 
 export const Ellipsis = ({courseId, coursePublished}: {courseId: string, coursePublished: boolean}) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
@@ -22,7 +23,7 @@ export const Ellipsis = ({courseId, coursePublished}: {courseId: string, courseP
             <Edit className="w-4 h-4 mr-2" />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => publishCourse({courseId, published: !coursePublished})}>
             <FileEdit className="w-4 h-4 mr-2" />
             {coursePublished ? "Draft" : "Publish"}
           </DropdownMenuItem>

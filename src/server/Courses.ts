@@ -226,3 +226,22 @@ export const deleteCourse = authenticatedAction
         revalidatePath("/teacher/courses")
     })
 
+// L'author can publish or draft a course
+export const publishCourse = authenticatedAction
+    .schema(z.object({
+        courseId: z.string(),
+        published: z.boolean()
+    }))
+    .action(async ({ctx:{userId}, parsedInput:{courseId, published}}) => {
+        await prisma.course.update({
+            where: {
+                id: courseId,
+                authorId: userId
+            },
+            data: {
+                published: published
+            }
+        })
+          
+        revalidatePath("/teacher/courses")
+    })
