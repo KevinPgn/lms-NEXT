@@ -1,6 +1,6 @@
 "use client"
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu"
-import { Edit, Ellipsis as EllipsisIcon, Trash } from "lucide-react"
+import { Edit, Ellipsis as EllipsisIcon, Trash, FileEdit } from "lucide-react"
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog"
 import React from "react"
 import { Button } from "@/components/ui/button"
@@ -8,7 +8,7 @@ import { deleteCourse } from "@/server/Courses"
 import {ToastContainer, toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
-export const Ellipsis = ({courseId}: {courseId: string}) => {
+export const Ellipsis = ({courseId, coursePublished}: {courseId: string, coursePublished: boolean}) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = React.useState(false);
 
   return (
@@ -21,6 +21,10 @@ export const Ellipsis = ({courseId}: {courseId: string}) => {
           <DropdownMenuItem>
             <Edit className="w-4 h-4 mr-2" />
             Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <FileEdit className="w-4 h-4 mr-2" />
+            {coursePublished ? "Draft" : "Publish"}
           </DropdownMenuItem>
           <DropdownMenuItem onSelect={() => setIsDeleteDialogOpen(true)}>
             <Trash className="w-4 h-4 mr-2" />
