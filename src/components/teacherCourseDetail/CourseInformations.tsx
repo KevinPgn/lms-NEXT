@@ -1,19 +1,26 @@
-"use client"
 import { Button } from "@/components/ui/button"
 import { Trash, LayoutDashboard, ListChecks } from "lucide-react"
-import {useState} from "react"
 
-export const CourseInformations = ({course}: {course: any}) => {
-  const [fieldsCompleted, setFieldsCompleted] = useState(1)
-  
+export const CourseInformations = ({course}: {course: any}) => {  
+  const requireFields = [
+    course?.title,
+    course?.description,
+    course?.image,
+    course?.price,
+    course?.levels,
+    course?.category
+  ]
+  const totalFields = requireFields.length
+  const completedFields = requireFields.filter(field => field).length
+
   return <div className="p-7">
     <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
             <span className="text-2xl font-bold">Course Setup</span>
-            <span className="text-sm font-normal text-gray-500">Complete all fields ({fieldsCompleted}/6)</span>
+            <span className="text-sm font-normal text-gray-500">Complete all fields ({completedFields}/{totalFields})</span>
         </div>
         <div className="flex items-center gap-4">
-            <Button variant="outline" disabled={fieldsCompleted !== 6}>Publish</Button>
+            <Button variant="outline" disabled={completedFields !== totalFields}>Publish</Button>
             <Button variant="destructive">
                 <Trash className="w-4 h-4" />
             </Button>
