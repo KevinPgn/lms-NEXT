@@ -2,9 +2,17 @@ import React from 'react'
 import { SidebarTeacher } from '@/features/sidebarTeacher/SidebarTeacher'
 import { Headers } from '@/components/headers/Headers'
 import { getSession } from '@/components/utils/CacheSession'
+import { getCourseById } from '@/server/Courses'
 
-const CoursePage = async () => {
+interface CoursePageProps {
+    params: {
+        courseId: string
+    }
+}
+
+const CoursePage = async ({params}: CoursePageProps) => {
   const session = await getSession()
+  const course = await getCourseById({courseId: params.courseId})
 
   return (
     <section className="flex">
@@ -13,7 +21,7 @@ const CoursePage = async () => {
     <main className="flex-1">
       <Headers session={session}/>
       
-      
+
     </main>
   </section>  
   )
