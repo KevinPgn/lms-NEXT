@@ -4,6 +4,7 @@ import {z} from "zod"
 import { authenticatedAction } from "@/lib/safe-actions"
 import { getSession } from "@/components/utils/CacheSession"
 import {cache} from "react"
+import { revalidatePath } from "next/cache"
 /*
 model Course {
   id String @id @default(cuid())
@@ -208,3 +209,20 @@ export const getCreatedCourses = authenticatedAction
         })
         return courses
     })
+
+// The author of the course can delete it
+export const deleteCourse = authenticatedAction
+    .schema(z.object({
+        courseId: z.string()
+    }))
+    .action(async ({ctx:{userId}, parsedInput:{courseId}}) => {
+        await prisma.course.delete({
+            where: {
+                id: courseId,
+                authorId: userId
+            }
+        })
+
+        revalidatePath("/teacher/courses")
+    })
+
