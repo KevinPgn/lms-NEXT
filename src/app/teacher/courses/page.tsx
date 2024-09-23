@@ -5,6 +5,9 @@ import { getSession } from '@/components/utils/CacheSession'
 import { getCreatedCourses } from '@/server/Courses'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Ellipsis } from '@/components/teacherCourses/Ellipsis'
+import { SearchBarTeacher } from '@/components/teacherCourses/SearchBarTeacher'
+import { BtnNewCourses } from '@/components/teacherCourses/BtnNewCourses'
+
 export const revalidate = 300 // 5 minutes
 
 export const metadata = {
@@ -12,9 +15,9 @@ export const metadata = {
   description: "Teacher Courses page",
 }
 
-const TeacherCoursesPage = async () => {
+const TeacherCoursesPage = async ({searchParams}: {searchParams: {search: string}}) => {
   const session = await getSession()
-  const courses = await getCreatedCourses({})
+  const courses = await getCreatedCourses({search: searchParams.search})
 
   return (
     <section className="flex">
@@ -22,6 +25,10 @@ const TeacherCoursesPage = async () => {
 
       <main className="flex-1">
         <Headers session={session}/>
+        <div className='flex justify-between items-center p-5'>
+          <SearchBarTeacher />
+          <BtnNewCourses />
+        </div>
         <div className='p-5'>
             <Table className='border border-gray-200 dark:border-zinc-700'>
         <TableCaption>A list of your recents courses.</TableCaption>
