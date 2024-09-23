@@ -266,3 +266,36 @@ export const createCourse = authenticatedAction
 
         redirect(`/teacher/courses/${course.id}`)
     })
+
+// Get a course by id
+export const getCourseById = authenticatedAction
+    .schema(z.object({
+        courseId: z.string()
+    }))
+    .action(async ({ctx:{userId}, parsedInput:{courseId}}) => {
+        const course = await prisma.course.findUnique({
+            where: {
+                id: courseId,
+                authorId: userId
+            },
+            select: {
+                id: true,
+                title: true,
+                description: true,
+                image: true,
+                price: true,
+                levels: true,
+                category: true,
+                published: true,
+                chapters: {
+                    select: {
+                        id: true,
+                        title: true,
+                        isPublished: true,
+                        freePreview: true
+                    }
+                }
+            }
+        })
+        return course
+    })
