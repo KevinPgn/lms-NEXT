@@ -5,6 +5,7 @@ import { authenticatedAction } from "@/lib/safe-actions"
 import { getSession } from "@/components/utils/CacheSession"
 import {cache} from "react"
 import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 /*
 model Course {
   id String @id @default(cuid())
@@ -244,4 +245,24 @@ export const publishCourse = authenticatedAction
         })
           
         revalidatePath("/teacher/courses")
+    })
+
+// Create a new course, BUT, we need just to ender the title of the course
+export const createCourse = authenticatedAction
+    .schema(z.object({
+        title: z.string()
+    }))
+    .action(async ({ctx:{userId}, parsedInput:{title}}) => {
+        const course = await prisma.course.create({
+            data: {
+                title: title,
+                authorId: userId,
+                description: "",
+                price: 0,
+                levels: "",
+                category: "",
+            }
+        })
+
+        redirect(`/teacher/courses/${course.id}`)
     })
