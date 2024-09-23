@@ -45,7 +45,7 @@ const TeacherCoursesPage = async ({searchParams}: {searchParams: {search: string
                         <TableRow key={course.id}>
                             <TableCell>{course.title}</TableCell>
                             <TableCell>{course.price === 0 ? 'Free' : `$${course.price}`}</TableCell>
-                            <TableCell>{course.published ? <span className='bg-blue-500 text-white text-xs px-2 py-1 rounded-md'>Published</span> : <span className='bg-red-500 text-white text-xs px-2 py-1 rounded-md'>Draft</span>}</TableCell>
+                            <TableCell>{course.published ? <span className='bg-blue-500 hover:bg-blue-600 cursor-pointer duration-75 text-white text-xs px-2 py-1 rounded-md'>Published</span> : <span className='bg-red-500 hover:bg-red-600 cursor-pointer duration-75 text-white text-xs px-2 py-1 rounded-md'>Draft</span>}</TableCell>
                             <TableCell>
                                 <Ellipsis courseId={course.id} />
                             </TableCell>
