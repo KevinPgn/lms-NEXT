@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Trash, LayoutDashboard, ListChecks } from "lucide-react"
 
-export const CourseInformations = ({course}: {course: any}) => {  
+export const CourseInformations = ({course, courseId}: {course: any, courseId: string}) => {  
   const requireFields = [
     course?.title,
     course?.description,

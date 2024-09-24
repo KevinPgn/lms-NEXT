@@ -14,7 +14,8 @@ interface CoursePageProps {
 
 const CoursePage = async ({params}: CoursePageProps) => {
   const session = await getSession()
-  const course = await getCourseById({courseId: params.courseId})
+  const {courseId} = params
+  const course = await getCourseById({courseId})
 
   return (
     <section className="flex">
@@ -29,7 +30,7 @@ const CoursePage = async ({params}: CoursePageProps) => {
         </div>
       ) : null}
 
-      <CourseInformations course={course?.data} />
+      <CourseInformations course={course?.data} courseId={courseId}/>
     </main>
   </section>  
   )
