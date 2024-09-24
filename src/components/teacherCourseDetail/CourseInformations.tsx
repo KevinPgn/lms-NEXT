@@ -9,6 +9,7 @@ import {ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { ChaptersForm } from "./ChaptersForm"
 import { PriceForm } from "./PriceForm"
+import { PublishCourse } from "./PublishCourse"
 
 export const CourseInformations = ({course, courseId}: {course: any, courseId: string}) => {  
   const requireFields = [
@@ -28,7 +29,7 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
             <span className="text-sm font-normal text-gray-500">Complete all fields ({completedFields}/{totalFields})</span>
         </div>
         <div className="flex items-center gap-4">
-            <Button variant="outline" disabled={completedFields !== totalFields}>Publish</Button>
+            <PublishCourse courseId={courseId} published={course?.published} />
             <Button variant="destructive">
                 <Trash className="w-4 h-4" />
             </Button>
