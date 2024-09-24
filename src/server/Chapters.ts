@@ -161,3 +161,18 @@ export const updateChapter = authenticatedAction.schema(z.object({
 
     revalidatePath(`/teacher/courses/${updatedChapter.courseId}`)
 })
+
+// Get the chapter by id
+export const getChapterById = async ({chapterId}: {chapterId: string}) => {
+    const chapter = await prisma.chapter.findUnique({
+        where: { id: chapterId },
+        select: {
+            title: true,
+            content: true,
+            videoUrl: true,
+            freePreview: true
+        }
+    })
+
+    return chapter
+}

@@ -5,7 +5,7 @@ import { getSession } from '@/components/utils/CacheSession'
 import { getCourseById } from '@/server/Courses'
 import { Headers } from '@/components/headers/Headers'
 import { BackBtn } from '@/components/teacherChapters/BackBtn'
-
+import { getChapterById } from '@/server/Chapters'
 interface ChapterIdPageProps {
     params: {
         courseId: string
@@ -16,8 +16,12 @@ interface ChapterIdPageProps {
 const ChapterIdPage: React.FC<ChapterIdPageProps> = async ({ params }) => {
     const { courseId, chapterId } = params
     const session = await getSession()
+    
+    const [course, chapter] = await Promise.all([
+        getCourseById({courseId}),
+        getChapterById({chapterId})
+    ])
 
-    const course = await getCourseById({courseId})
     return (
         <section className="flex">
         <SidebarTeacher />
