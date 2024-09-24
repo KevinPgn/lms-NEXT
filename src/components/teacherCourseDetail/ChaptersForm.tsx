@@ -21,6 +21,11 @@ export const ChaptersForm = ({courseId, courseChapters}: {courseId: string, cour
               <span className="text-md font-normal">{chapter.title}</span>
             </div>
             <div className="flex items-center gap-5">
+              {chapter.isPublished ? (
+                <span className="bg-green-500 text-xs text-white px-2 py-1 rounded-full">Published</span>
+              ) : (
+                <span className="bg-gray-500 text-xs text-white px-2 py-1 rounded-full">Draft</span>
+              )}
               <PencilLine size={20} className="cursor-pointer" />
               <Trash size={20} className="cursor-pointer" />
             </div>
