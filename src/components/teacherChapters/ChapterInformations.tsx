@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button"
-import { Trash, LayoutDashboard, Video } from "lucide-react"
+import { Trash, LayoutDashboard, Video, Eye } from "lucide-react"
 import { PublishChapter } from "./PublishedChapter"
 import { TitleFormChapter } from "./TitleFormChapter"
 import {ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { DescriptionFormChapter } from "./DescriptionFormChapter"
 import { VideoFormChapter } from "./VideoFormChapter"
+import { FreePreviewFormChapter } from "./FreePreviewFormChapter"
 
 export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapterId: string}) => {  
   const requireFields = [
@@ -36,11 +37,19 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
                     <LayoutDashboard className="w-8 h-8 text-blue-500" />
                 </div>
                 <span className="text-xl font-bold">Customize your chapter</span>
-            </div>
+        </div>
 
             <TitleFormChapter initialTitle={chapter?.title} chapterId={chapterId} />
             <DescriptionFormChapter initialDescription={chapter?.content} chapterId={chapterId} />
         
+            <div className="flex items-center gap-2 mt-8">
+                <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
+                    <Eye className="w-8 h-8 text-blue-500" />
+                </div>
+                <span className="text-xl font-bold">Access settings</span>
+            </div>
+
+            <FreePreviewFormChapter initialFreePreview={chapter?.freePreview} chapterId={chapterId} />
         </div>
         <div className="w-[45%] max-md:w-full max-md:mt-10">
             <div className="flex items-center gap-2">
@@ -49,7 +58,7 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
                 </div>
                 <span className="text-xl font-bold">Add a video</span>
             </div>
-            
+
             <VideoFormChapter initialVideo={chapter?.video} chapterId={chapterId} />
         </div>   
     </div>
