@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Trash } from "lucide-react"
-import { PublishCourse } from "../teacherCourseDetail/PublishCourse"
+import { PublishChapter } from "./PublishedChapter"
 
 export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapterId: string}) => {  
   const requireFields = [
@@ -17,7 +17,7 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
             <span className="text-sm font-normal text-gray-500">Complete all fields ({completedFields}/{totalFields})</span>
         </div>
         <div className="flex items-center gap-4">
-            <PublishCourse courseId={chapterId} published={chapter?.published} />
+            <PublishChapter chapterId={chapterId} isPublished={chapter?.isPublished} />
             <Button variant="destructive">
                 <Trash className="w-4 h-4" />
             </Button>

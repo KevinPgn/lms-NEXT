@@ -162,6 +162,38 @@ export const updateChapter = authenticatedAction.schema(z.object({
     revalidatePath(`/teacher/courses/${updatedChapter.courseId}`)
 })
 
+// Publish the chapter
+export const publishChapter = authenticatedAction.schema(z.object({
+    chapterId: z.string(),
+    isPublished: z.boolean()
+})).action(async ({ctx:{userId}, parsedInput:{chapterId, isPublished}}) => {
+    const chapter = await prisma.chapter.findUnique({
+        where: {id: chapterId},
+        select: {
+            course: {
+                select: {
+                    authorId: true
+                }
+            }
+        }
+    })
+    
+    if(!chapter) {
+        throw new Error("Chapter not found")
+    }
+
+    if(chapter.course.authorId !== userId) {
+        throw new Error("You are not authorized to publish this chapter")
+    }
+
+    const updatedChapter = await prisma.chapter.update({
+        where: {id: chapterId},
+        data: {isPublished: isPublished}   
+    })
+
+    revalidatePath(`/teacher/courses/${updatedChapter.courseId}`)  
+})
+
 // Get the chapter by id
 export const getChapterById = async ({chapterId}: {chapterId: string}) => {
     const chapter = await prisma.chapter.findUnique({
@@ -170,7 +202,8 @@ export const getChapterById = async ({chapterId}: {chapterId: string}) => {
             title: true,
             content: true,
             videoUrl: true,
-            freePreview: true
+            freePreview: true,
+            isPublished: true
         }
     })
 
