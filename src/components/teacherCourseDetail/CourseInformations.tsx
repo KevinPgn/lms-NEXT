@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Trash, LayoutDashboard, ListChecks } from "lucide-react"
+import { Trash, LayoutDashboard, ListChecks, DollarSign } from "lucide-react"
 import { TitleForm } from "./TitleForm"
 import { DescriptionForm } from "./DescriptionForm"
 import { ImageForm } from "./ImageForm"
@@ -7,13 +7,14 @@ import { CategoryForm } from "./CategoryForm"
 import { LevelsForm } from "./LevelsForm"
 import {ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { ChaptersForm } from "./ChaptersForm"
+import { PriceForm } from "./PriceForm"
 
 export const CourseInformations = ({course, courseId}: {course: any, courseId: string}) => {  
   const requireFields = [
     course?.title,
     course?.description,
     course?.image,
-    course?.price,
     course?.levels,
     course?.category
   ]
@@ -35,7 +36,7 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
     </div>
 
     <div className="flex items-start justify-between flex-wrap mt-14">
-        <div className="w-[40%] max-md:w-full">
+        <div className="w-[45%] max-md:w-full">
             <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
                     <LayoutDashboard className="w-8 h-8 text-blue-500" />
@@ -50,13 +51,23 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
             <LevelsForm initialLevels={course?.levels} courseId={courseId} />
         
         </div>
-        <div className="w-[40%] max-md:w-full max-md:mt-10">
+        <div className="w-[45%] max-md:w-full max-md:mt-10">
         <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
                     <ListChecks className="w-8 h-8 text-blue-500" />
                 </div>
                 <span className="text-xl font-bold">Course Chapters</span>
-            </div> 
+        </div> 
+            <ChaptersForm courseId={courseId} />
+
+            <div className="flex items-center gap-2 mt-14">
+                <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
+                    <DollarSign className="w-8 h-8 text-blue-500" />
+                </div>
+                <span className="text-xl font-bold">Sell your course</span>
+            </div>
+            <PriceForm initialPrice={course?.price} courseId={courseId} />
+
         </div>   
     </div>
     <ToastContainer />
