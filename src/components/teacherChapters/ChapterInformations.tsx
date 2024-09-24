@@ -21,7 +21,7 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
             <span className="text-sm font-normal text-gray-500">Complete all fields ({completedFields}/{totalFields})</span>
         </div>
         <div className="flex items-center gap-4">
-            <PublishChapter chapterId={chapterId} isPublished={chapter?.isPublished} />
+            <PublishChapter chapterId={chapterId} isPublished={chapter?.isPublished} completedFields={completedFields} />
             <Button variant="destructive">
                 <Trash className="w-4 h-4" />
             </Button>

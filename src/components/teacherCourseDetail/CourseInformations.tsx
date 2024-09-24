@@ -30,7 +30,7 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
             <span className="text-sm font-normal text-gray-500">Complete all fields ({completedFields}/{totalFields})</span>
         </div>
         <div className="flex items-center gap-4">
-            <PublishCourse courseId={courseId} published={course?.published} />
+            <PublishCourse courseId={courseId} published={course?.published} completedFields={completedFields}/>
             <Button variant="destructive">
                 <Trash className="w-4 h-4" />
             </Button>
