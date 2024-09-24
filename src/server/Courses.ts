@@ -179,11 +179,17 @@ export const getPurchasesCourse = authenticatedAction
             }
         })
 
-        return purchases.map((purchase) => ({
-            ...purchase,
-            isCompleted: purchase.course.userProgress.length > 0,
-            progressPercentage: purchase.course.userProgress.length > 0 ? (purchase.course.userProgress.length / purchase.course._count.chapters) * 100 : 0
-        }))
+        return purchases.map((purchase) => {
+            const totalChapters = purchase.course._count.chapters;
+            const completed = purchase.course.userProgress.length;
+            const progressPercentage = totalChapters > 0 ? (completed / totalChapters) * 100 : 0;
+        
+            return {
+              ...purchase,
+              isCompleted: completed > 0,
+              progressPercentage,
+            }
+          })
     })
 
 // Get all courses created by the connected user
