@@ -38,7 +38,7 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
             </div>
 
             <TitleFormChapter initialTitle={chapter?.title} chapterId={chapterId} />
-            <DescriptionFormChapter initialDescription={chapter?.description} chapterId={chapterId} />
+            <DescriptionFormChapter initialDescription={chapter?.content} chapterId={chapterId} />
         
         </div>
         <div className="w-[45%] max-md:w-full max-md:mt-10">

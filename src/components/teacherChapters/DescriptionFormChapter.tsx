@@ -13,7 +13,7 @@ export const DescriptionFormChapter = ({initialDescription, chapterId}: {initial
   
   const onSubmit = async (data: any) => {
     try{
-      await updateChapter({chapterId, description: data.description})
+      await updateChapter({chapterId, content: data.content})
       toast.success("Chapter description updated successfully")
       setIsEditing(false)
     } catch(error){
@@ -32,7 +32,7 @@ export const DescriptionFormChapter = ({initialDescription, chapterId}: {initial
     {isEditing ? (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name="title"
+          name="content"
           control={control}
           defaultValue={initialDescription}
           render={({field}) => (
