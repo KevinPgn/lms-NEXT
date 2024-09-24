@@ -131,3 +131,33 @@ export const deleteChapter = authenticatedAction.schema(z.object({
 
     revalidatePath(`/teacher/courses/${deletedChapter.courseId}`)
 })
+
+export const updateChapter = authenticatedAction.schema(z.object({
+    chapterId: z.string(),
+    title: z.string().optional(),
+    content: z.string().optional(),
+    videoUrl: z.string().optional(),
+    freePreview: z.boolean().optional()
+})).action(async ({ ctx: { userId }, parsedInput: { chapterId, ...data } }) => {
+    const chapter = await prisma.chapter.findUnique({
+        where: { id: chapterId },
+        select: {
+            course: { select: { authorId: true } }
+        }
+    })
+
+    if (!chapter) {
+        throw new Error("Chapter not found")
+    }
+
+    if (chapter.course.authorId !== userId) {
+        throw new Error("You are not authorized to update this chapter")
+    }
+
+    const updatedChapter = await prisma.chapter.update({
+        where: { id: chapterId },
+        data: { ...data }
+    })
+
+    revalidatePath(`/teacher/courses/${updatedChapter.courseId}`)
+})
