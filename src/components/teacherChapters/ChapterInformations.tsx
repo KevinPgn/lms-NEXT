@@ -5,6 +5,7 @@ import { TitleFormChapter } from "./TitleFormChapter"
 import {ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { DescriptionFormChapter } from "./DescriptionFormChapter"
+import { VideoFormChapter } from "./VideoFormChapter"
 
 export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapterId: string}) => {  
   const requireFields = [
@@ -48,6 +49,8 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
                 </div>
                 <span className="text-xl font-bold">Add a video</span>
             </div>
+            
+            <VideoFormChapter initialVideo={chapter?.video} chapterId={chapterId} />
         </div>   
     </div>
 
