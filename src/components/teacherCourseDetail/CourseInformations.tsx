@@ -5,6 +5,8 @@ import { DescriptionForm } from "./DescriptionForm"
 import { ImageForm } from "./ImageForm"
 import { CategoryForm } from "./CategoryForm"
 import { LevelsForm } from "./LevelsForm"
+import {ToastContainer} from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export const CourseInformations = ({course, courseId}: {course: any, courseId: string}) => {  
   const requireFields = [
@@ -40,25 +42,13 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
                 </div>
                 <span className="text-xl font-bold">Customize your course</span>
             </div>
-            <TitleForm 
-            initialTitle={course?.title}
-            courseId={courseId} />
 
-            <DescriptionForm 
-            initialDescription={course?.description}
-            courseId={courseId} />
-
-            <ImageForm 
-            initialImage={course?.image}
-            courseId={courseId} />
-
-            <CategoryForm 
-            initialCategory={course?.category}
-            courseId={courseId} />
-
-            <LevelsForm 
-            initialLevels={course?.levels}
-            courseId={courseId} />
+            <TitleForm initialTitle={course?.title} courseId={courseId} />
+            <DescriptionForm initialDescription={course?.description} courseId={courseId} />
+            <ImageForm initialImage={course?.image} courseId={courseId} />
+            <CategoryForm initialCategory={course?.category} courseId={courseId} />
+            <LevelsForm initialLevels={course?.levels} courseId={courseId} />
+        
         </div>
         <div className="w-[40%] max-md:w-full max-md:mt-10">
         <div className="flex items-center gap-2">
@@ -69,5 +59,6 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
             </div> 
         </div>   
     </div>
+    <ToastContainer />
   </div>
 }

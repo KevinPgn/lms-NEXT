@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input"
 import {Controller, useForm} from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {Pencil} from "lucide-react"
+import { updateCourseById } from "@/server/Courses"
+import {toast} from "react-toastify"
 
 export const TitleForm = ({initialTitle, courseId}: {initialTitle: string, courseId: string}) => {
   const [isEditing, setIsEditing] = useState(false)
