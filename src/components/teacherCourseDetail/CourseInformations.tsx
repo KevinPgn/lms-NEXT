@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Trash, LayoutDashboard, ListChecks } from "lucide-react"
 import { TitleForm } from "./TitleForm"
+import { DescriptionForm } from "./DescriptionForm"
 
 export const CourseInformations = ({course, courseId}: {course: any, courseId: string}) => {  
   const requireFields = [
@@ -38,6 +39,10 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
             </div>
             <TitleForm 
             initialTitle={course?.title}
+            courseId={courseId} />
+
+            <DescriptionForm 
+            initialDescription={course?.description}
             courseId={courseId} />
         </div>
         <div className="w-[40%] max-md:w-full max-md:mt-10">
