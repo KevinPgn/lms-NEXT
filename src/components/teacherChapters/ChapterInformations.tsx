@@ -4,6 +4,7 @@ import { PublishChapter } from "./PublishedChapter"
 import { TitleFormChapter } from "./TitleFormChapter"
 import {ToastContainer} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { DescriptionFormChapter } from "./DescriptionFormChapter"
 
 export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapterId: string}) => {  
   const requireFields = [
@@ -35,8 +36,10 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
                 </div>
                 <span className="text-xl font-bold">Customize your chapter</span>
             </div>
-            
+
             <TitleFormChapter initialTitle={chapter?.title} chapterId={chapterId} />
+            <DescriptionFormChapter initialDescription={chapter?.description} chapterId={chapterId} />
+        
         </div>
         <div className="w-[45%] max-md:w-full max-md:mt-10">
             <div className="flex items-center gap-2">
@@ -47,7 +50,7 @@ export const ChapterInformations = ({chapter, chapterId}: {chapter: any, chapter
             </div>
         </div>   
     </div>
-    
+
     <ToastContainer />
   </div>
 }
