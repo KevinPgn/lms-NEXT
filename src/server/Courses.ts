@@ -313,7 +313,7 @@ export const getCourseById = authenticatedAction
             published: z.boolean().optional()
         }))
         .action(async ({ctx:{userId}, parsedInput:{courseId, ...data}}) => {
-            const course = await prisma.course.update({
+            await prisma.course.update({
                 where: {
                     id: courseId,
                     authorId: userId
@@ -322,7 +322,8 @@ export const getCourseById = authenticatedAction
                    ...data
                 }
             })
-            return course
+            
+            revalidatePath(`/teacher/courses/${courseId}`)
         })
     )
 

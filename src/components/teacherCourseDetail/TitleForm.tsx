@@ -11,8 +11,14 @@ export const TitleForm = ({initialTitle, courseId}: {initialTitle: string, cours
   const [isEditing, setIsEditing] = useState(false)
   const {control, handleSubmit, formState: {errors}} = useForm()
   
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = async (data: any) => {
+    try{
+      await updateCourseById({courseId, title: data.title})
+      toast.success("Course title updated successfully")
+      setIsEditing(false)
+    } catch(error){
+      toast.error("Failed to update course title")
+    }
   }
 
   return <div className="w-full p-4 bg-[#F4F4F4] dark:bg-transparent dark:border dark:border-gray-700 rounded-md mt-7">
