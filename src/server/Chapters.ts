@@ -108,22 +108,26 @@ export const deleteChapter = authenticatedAction.schema(z.object({
 })).action(async ({ctx:{userId}, parsedInput:{chapterId}}) => {
     const chapter = await prisma.chapter.findUnique({
         where: {
-            id: chapterId,
+            id: chapterId
         },
         select: {
-            courseId: true
+            course: {
+                select: {
+                    authorId: true
+                }
+            }
         }
     })
 
-    if(!chapter) {
-        throw new Error("Chapter not found")
+    if (!chapter || chapter.course.authorId !== userId) {
+        throw new Error("You are not authorized to delete this chapter")
     }
 
-    await prisma.chapter.delete({
+   const deletedChapter = await prisma.chapter.delete({
         where: {
-            id: chapterId,
+            id: chapterId
         }
     })
 
-    revalidatePath(`/teacher/courses/${chapter.courseId}`)
+    revalidatePath(`/teacher/courses/${deletedChapter.courseId}`)
 })
