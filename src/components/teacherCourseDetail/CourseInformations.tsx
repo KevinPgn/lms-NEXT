@@ -3,6 +3,8 @@ import { Trash, LayoutDashboard, ListChecks } from "lucide-react"
 import { TitleForm } from "./TitleForm"
 import { DescriptionForm } from "./DescriptionForm"
 import { ImageForm } from "./ImageForm"
+import { CategoryForm } from "./CategoryForm"
+import { LevelsForm } from "./LevelsForm"
 
 export const CourseInformations = ({course, courseId}: {course: any, courseId: string}) => {  
   const requireFields = [
@@ -48,6 +50,14 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
 
             <ImageForm 
             initialImage={course?.image}
+            courseId={courseId} />
+
+            <CategoryForm 
+            initialCategory={course?.category}
+            courseId={courseId} />
+
+            <LevelsForm 
+            initialLevels={course?.levels}
             courseId={courseId} />
         </div>
         <div className="w-[40%] max-md:w-full max-md:mt-10">
