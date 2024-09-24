@@ -4,13 +4,21 @@ import { Input } from "@/components/ui/input"
 import {Controller, useForm} from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {Pencil} from "lucide-react"
+import { updateCourseById } from "@/server/Courses"
+import {toast} from "react-toastify"
 
 export const CategoryForm = ({initialCategory, courseId}: {initialCategory: string, courseId: string}) => {
   const [isEditing, setIsEditing] = useState(false)
   const {control, handleSubmit, formState: {errors}} = useForm()
   
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = async (data: any) => {
+    try{
+      await updateCourseById({courseId, category: data.category})
+      toast.success("Course category updated successfully")
+      setIsEditing(false)
+    } catch(error){
+      toast.error("Failed to update course category")
+    }
   }
 
   return <div className="w-full p-4 bg-[#F4F4F4] dark:bg-transparent dark:border dark:border-gray-700 rounded-md mt-7">
