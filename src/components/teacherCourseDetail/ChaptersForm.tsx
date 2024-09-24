@@ -56,7 +56,7 @@ export const ChaptersForm = ({ courseId, courseChapters }: { courseId: string, c
                   <span className="bg-gray-500 text-xs text-white px-2 py-1 rounded-full">Draft</span>
                 )}
                 <PencilLine
-                  onClick={() => router.push(`/teacher/courses/${courseId}/chapters/${chapter.id}/edit`)}
+                  onClick={() => router.push(`/teacher/courses/${courseId}/chapters/${chapter.id}`)}
                   size={20}
                   className="cursor-pointer"
                 />
