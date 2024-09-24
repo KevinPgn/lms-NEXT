@@ -32,7 +32,7 @@ export const LevelsForm = ({initialLevels, courseId}: {initialLevels: string, co
     {isEditing ? (
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name="category"
+          name="levels"
           control={control}
           defaultValue={initialLevels}
           render={({field}) => (
