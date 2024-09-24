@@ -6,6 +6,7 @@ import { getCourseById } from '@/server/Courses'
 import { Headers } from '@/components/headers/Headers'
 import { BackBtn } from '@/components/teacherChapters/BackBtn'
 import { getChapterById } from '@/server/Chapters'
+import { ChapterInformations } from '@/components/teacherChapters/ChapterInformations'
 
 interface ChapterIdPageProps {
     params: {
@@ -36,6 +37,8 @@ const ChapterIdPage: React.FC<ChapterIdPageProps> = async ({ params }) => {
             </div>
           ) : null}
           <BackBtn />
+
+          <ChapterInformations chapter={chapter} chapterId={chapterId} />
         </main>
       </section> 
   )
