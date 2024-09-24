@@ -17,7 +17,8 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
     course?.description,
     course?.image,
     course?.levels,
-    course?.category
+    course?.category,
+    course?.chapters && course?.chapters.length > 0
   ]
   const totalFields = requireFields.length
   const completedFields = requireFields.filter(field => field).length
