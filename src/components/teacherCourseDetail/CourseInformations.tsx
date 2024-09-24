@@ -59,7 +59,7 @@ export const CourseInformations = ({course, courseId}: {course: any, courseId: s
                 </div>
                 <span className="text-xl font-bold">Course Chapters</span>
         </div> 
-            <ChaptersForm courseId={courseId} />
+            <ChaptersForm courseId={courseId} courseChapters={course?.chapters}/>
 
             <div className="flex items-center gap-2 mt-14">
                 <div className="flex items-center justify-center w-14 h-14 bg-blue-100 rounded-full">
