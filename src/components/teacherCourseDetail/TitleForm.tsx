@@ -1,13 +1,13 @@
 "use client"
 import {useState} from "react"
 import { Input } from "@/components/ui/input"
-import {useForm, FieldValues} from "react-hook-form"
+import {Controller, useForm} from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {Pencil} from "lucide-react"
 
 export const TitleForm = ({initialTitle, courseId}: {initialTitle: string, courseId: string}) => {
   const [isEditing, setIsEditing] = useState(false)
-  const {control, handleSubmit} = useForm()
+  const {control, handleSubmit, formState: {errors}} = useForm()
   
   const onSubmit = (data: any) => {
     console.log(data)
@@ -23,10 +23,16 @@ export const TitleForm = ({initialTitle, courseId}: {initialTitle: string, cours
     </div>
     {isEditing ? (
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
+        <Controller
           name="title"
+          control={control}
           defaultValue={initialTitle}
-          className="mt-2"
+          render={({field}) => (
+            <Input
+              {...field}
+              className="mt-2"
+            />
+          )}
         />
         <Button type="submit" className="mt-4">Save</Button>
       </form>
