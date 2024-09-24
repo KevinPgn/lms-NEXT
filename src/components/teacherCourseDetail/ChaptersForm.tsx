@@ -1,9 +1,11 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import {Plus, GripVerticalIcon, PencilLine, Trash} from "lucide-react"
-import { createChapter } from "@/server/Chapters"
-
+import { createChapter, deleteChapter } from "@/server/Chapters"
+import { useRouter } from "next/navigation"
 export const ChaptersForm = ({courseId, courseChapters}: {courseId: string, courseChapters: any}) => {
+  const router = useRouter()
+  
   return <div className="w-full p-4 bg-[#F4F4F4] dark:bg-transparent dark:border dark:border-gray-700 rounded-md mt-7">
     <div className="flex items-center justify-between">
       <span className="text-lg font-bold">Course Chapters</span>
@@ -26,8 +28,14 @@ export const ChaptersForm = ({courseId, courseChapters}: {courseId: string, cour
               ) : (
                 <span className="bg-gray-500 text-xs text-white px-2 py-1 rounded-full">Draft</span>
               )}
-              <PencilLine size={20} className="cursor-pointer" />
-              <Trash size={20} className="cursor-pointer" />
+              <PencilLine
+              onClick={() => router.push(`/teacher/courses/${courseId}/chapters/${chapter.id}/edit`)}
+              size={20} className="cursor-pointer" />
+              <Trash
+              onClick={async () => {
+                await deleteChapter({chapterId: chapter.id})
+              }}
+              size={20} className="cursor-pointer" />
             </div>
           </div>
         ))

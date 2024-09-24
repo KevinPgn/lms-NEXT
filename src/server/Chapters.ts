@@ -102,3 +102,28 @@ export const createChapter = authenticatedAction.schema(z.object({
 
     revalidatePath(`/teacher/courses/${courseId}`)
 })
+
+export const deleteChapter = authenticatedAction.schema(z.object({
+    chapterId: z.string()
+})).action(async ({ctx:{userId}, parsedInput:{chapterId}}) => {
+    const chapter = await prisma.chapter.findUnique({
+        where: {
+            id: chapterId,
+        },
+        select: {
+            courseId: true
+        }
+    })
+
+    if(!chapter) {
+        throw new Error("Chapter not found")
+    }
+
+    await prisma.chapter.delete({
+        where: {
+            id: chapterId,
+        }
+    })
+
+    revalidatePath(`/teacher/courses/${chapter.courseId}`)
+})
