@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import {Pencil} from "lucide-react"
 import { updateChapter } from "@/server/Chapters"
 import {toast} from "react-toastify"
-
+import { Editor } from "./Editor"
 export const DescriptionFormChapter = ({initialDescription, chapterId}: {initialDescription: string, chapterId: string}) => {
   const [isEditing, setIsEditing] = useState(false)
   const {control, handleSubmit, formState: {errors}} = useForm()
@@ -36,7 +36,7 @@ export const DescriptionFormChapter = ({initialDescription, chapterId}: {initial
           control={control}
           defaultValue={initialDescription}
           render={({field}) => (
-            <Input
+            <Editor
               {...field}
               className="mt-2"
             />
@@ -45,7 +45,9 @@ export const DescriptionFormChapter = ({initialDescription, chapterId}: {initial
         <Button type="submit" className="mt-4">Save</Button>
       </form>
     ) : (
-      <p className="text-md font-normal mt-2">{initialDescription ? initialDescription : "No description"}</p>
+      <p className="text-md font-normal mt-2">{initialDescription ? 
+        <div dangerouslySetInnerHTML={{ __html: initialDescription }} />
+        : "No description"}</p>
     )}
   </div>
 }
