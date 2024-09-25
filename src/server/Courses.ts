@@ -104,6 +104,15 @@ export const getCourses = cache(async (category?: string, search?: string) => {
                    id: true
                 }
             },
+            chapters: {
+                select: {
+                    id: true,
+                },
+                orderBy: {
+                    createdAt: "asc"
+                },
+                take: 1
+            },
             _count: {
                 select: {
                     chapters: true
@@ -131,7 +140,8 @@ export const getCourses = cache(async (category?: string, search?: string) => {
         ...course,
         isPurchased: course.purchases.length > 0,
         isCompleted: userId ? course.userProgress.length > 0 : false,
-        progressPercentage: userId ? course.userProgress.length > 0 ? (course.userProgress.length / course._count.chapters) * 100 : 0 : 0
+        progressPercentage: userId ? course.userProgress.length > 0 ? (course.userProgress.length / course._count.chapters) * 100 : 0 : 0,
+        firstChapterId: course.chapters[0]?.id
     }))
 })
 
@@ -333,3 +343,36 @@ export const getCourseById = authenticatedAction
         })
     )
 
+// Get the course Id
+export const getCourseId = cache(async (courseId: string) => {
+    const session = await getSession()
+    const userId = session?.user?.id
+
+    const course = await prisma.course.findUnique({
+        where: { id: courseId },
+        select: {
+            id: true,
+            title: true,
+            chapters: {
+                select: {
+                    id: true,
+                    title: true,
+                    content: true,
+                    videoUrl: true,
+                    freePreview: true,
+                    userProgress: {
+                        where: {
+                            userId: userId,
+                            isCompleted: true
+                        },
+                        select: {
+                            id: true
+                        }
+                    }
+                }
+            }
+        }
+    })
+    
+    return course
+})

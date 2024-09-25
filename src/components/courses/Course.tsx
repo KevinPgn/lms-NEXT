@@ -3,6 +3,8 @@ import { Progress } from "../ui/progress"
 import Link from "next/link"
 
 export const Course = ({course, session}: {course: any, session: any}) => {
+  const courseLink = course.firstChapterId ? `/courses/${course.id}/chapters/${course.firstChapterId}` : `/courses/${course.id}`
+  
   return <div className="w-[320px] cursor-pointer hover:-translate-y-1 transition-all duration-300 rounded-md border border-gray-200 dark:border-gray-700 p-3">
     {course.image ? (
         <img src={course.image} alt={course.title} className="w-full h-40 object-cover rounded-md" />
@@ -10,7 +12,7 @@ export const Course = ({course, session}: {course: any, session: any}) => {
         <div className="w-full h-40 bg-gray-300 rounded-md"></div>
     )}
     
-    <Link href={`/courses/${course.id}`}>
+    <Link href={courseLink}>
         <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-3">{course.title}</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{course.category}</p>
         <p className="text-sm text-gray-500 dark:text-gray-400">{course.description}</p>
