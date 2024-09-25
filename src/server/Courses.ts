@@ -354,11 +354,12 @@ export const getCourseId = cache(async (courseId: string) => {
             id: true,
             title: true,
             chapters: {
+                where: {
+                    isPublished: true
+                },
                 select: {
                     id: true,
                     title: true,
-                    content: true,
-                    videoUrl: true,
                     freePreview: true,
                     userProgress: {
                         where: {
