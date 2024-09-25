@@ -1,5 +1,6 @@
 import {BookOpenIcon} from "lucide-react"
 import { Progress } from "../ui/progress"
+import Link from "next/link"
 
 export const Course = ({course, session}: {course: any, session: any}) => {
   return <div className="w-[320px] cursor-pointer hover:-translate-y-1 transition-all duration-300 rounded-md border border-gray-200 dark:border-gray-700 p-3">
@@ -9,9 +10,11 @@ export const Course = ({course, session}: {course: any, session: any}) => {
         <div className="w-full h-40 bg-gray-300 rounded-md"></div>
     )}
     
-    <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-3">{course.title}</h2>
-    <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{course.category}</p>
-    <p className="text-sm text-gray-500 dark:text-gray-400">{course.description}</p>
+    <Link href={`/courses/${course.id}`}>
+        <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100 mt-3">{course.title}</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">{course.category}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{course.description}</p>
+    </Link>
 
     {/* Number of chapters */}
     <div className="flex items-center gap-2 mt-3">
