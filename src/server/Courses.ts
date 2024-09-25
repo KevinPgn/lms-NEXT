@@ -371,9 +371,20 @@ export const getCourseId = cache(async (courseId: string) => {
                         }
                     }
                 }
+            },
+            purchases: {
+                where: {
+                    userId: userId
+                },
+                select: {
+                    id: true
+                }
             }
         }
     })
     
-    return course
+    return course ? {
+        ...course,
+        isPurchased: course.purchases.length > 0
+    } : null
 })

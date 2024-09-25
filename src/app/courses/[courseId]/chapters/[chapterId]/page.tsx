@@ -22,9 +22,10 @@ export default async function CoursePageWithChapters({params}: CoursePageWithCha
   const session = await getSession()
   const course = await getCourseId(params.courseId)
   const chapter = await getChapterById({chapterId: params.chapterId})
+
     return (
     <section className="flex">
-      <SidebarCourse courseName={course?.title ?? ""} courseId={course?.id ?? ""} courseChapters={course?.chapters ?? []}/>
+      <SidebarCourse courseName={course?.title ?? ""} courseId={course?.id ?? ""} courseChapters={course?.chapters ?? []} isPurchased={course?.isPurchased ?? false} />
 
       <main className="flex-1">
         <Headers session={session}/>

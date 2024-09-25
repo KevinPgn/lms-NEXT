@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
-export const LinksChapters = ({courseChapters, courseId}: {courseChapters: any, courseId: string}) => {
+export const LinksChapters = ({courseChapters, courseId, isPurchased}: {courseChapters: any, courseId: string, isPurchased: boolean}) => {
   const pathname = usePathname()
 
   return <div className="flex flex-col gap-y-3">
@@ -19,8 +19,8 @@ export const LinksChapters = ({courseChapters, courseId}: {courseChapters: any, 
         key={chapter.id} 
         href={`/courses/${courseId}/chapters/${chapter.id}`}
       >
-        {chapter.freePreview && <Video size={20} className="text-zinc-500"/>}
-        {!chapter.freePreview && <Lock size={20} className="text-zinc-500"/>}
+        {(chapter.freePreview || isPurchased) && <Video size={20} className="text-zinc-500"/>}
+        {!chapter.freePreview && !isPurchased && <Lock size={20} className="text-zinc-500"/>}
         <span className="text-md">{chapter.title}</span>
         {pathname === `/courses/${courseId}/chapters/${chapter.id}` && (
           <div className="absolute right-0 top-0 bottom-0 w-1 bg-black dark:bg-white" />
