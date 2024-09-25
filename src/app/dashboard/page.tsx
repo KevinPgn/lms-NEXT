@@ -13,30 +13,29 @@ export const metadata = {
 
 const DashboardPage = async () => {
   const session = await getSession()
-  const purchasesCourses = await getPurchasesCourse({})
-
-  const courses = purchasesCourses?.data
+  const purchasesCoursesResult = await getPurchasesCourse({})
+  const purchasesCourses = purchasesCoursesResult?.data || []
 
   return (
     <section className="flex">
-    <SidebarHome />
+      <SidebarHome />
 
-    <main className="flex-1">
-      <Headers session={session}/>
-      <HeaderDashboard />
-      <div className="flex flex-col gap-4 p-3 mt-2">
-        {courses && courses.length === 0 ? (
-          <p className="text-center text-gray-500">No courses found</p>
-        ) : (
-          <div className="flex flex-wrap justify-center gap-8">
-            {courses?.map((course) => (
-              <Course key={course.course.id} course={course.course} session={session}/>
-            ))}
-          </div>
-        )}
-      </div>
-    </main>
-  </section>    
+      <main className="flex-1">
+        <Headers session={session}/>
+        <HeaderDashboard />
+        <div className="flex flex-col gap-4 p-3 mt-2">
+          {purchasesCourses.length === 0 ? (
+            <p className="text-center text-gray-500">No courses found</p>
+          ) : (
+            <div className="flex flex-wrap justify-center gap-8">
+              {purchasesCourses.map((course) => (
+                <Course key={course.id} course={course} session={session}/>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
+    </section>    
   )
 }
 

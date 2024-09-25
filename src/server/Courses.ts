@@ -170,20 +170,17 @@ export const getPurchasesCourse = authenticatedAction
                             },
                             orderBy: {
                                 createdAt: "asc"
-                            },
-                            take: 1
-                        },
-                        ...(userId && {
-                            userProgress: {
-                                where: {
-                                    userId: userId,
-                                    isCompleted: true
-                                },
-                                select: {
-                                    id: true
-                                }
                             }
-                        }),
+                        },
+                        userProgress: {
+                            where: {
+                                userId: userId,
+                                isCompleted: true
+                            },
+                            select: {
+                                id: true
+                            }
+                        },
                         _count: {
                             select: {
                                 chapters: true
@@ -199,18 +196,20 @@ export const getPurchasesCourse = authenticatedAction
         })
 
         return purchases.map((purchase) => {
-            const totalChapters = purchase.course._count.chapters;
-            const completed = purchase.course.userProgress.length;
+            const course = purchase.course;
+            const totalChapters = course._count.chapters;
+            const completed = course.userProgress.length;
             const progressPercentage = totalChapters > 0 ? (completed / totalChapters) * 100 : 0;
-            const firstChapterId = purchase.course.chapters[0]?.id
+            const firstChapterId = course.chapters[0]?.id;
         
             return {
-              ...purchase,
-              isCompleted: completed > 0,
-              progressPercentage,
-              firstChapterId
+                ...course,
+                isPurchased: true,
+                isCompleted: completed === totalChapters,
+                progressPercentage,
+                firstChapterId
             }
-          })
+        })
     })
 
 // Get all courses created by the connected user
