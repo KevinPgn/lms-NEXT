@@ -10,13 +10,15 @@ export const metadata = {
 import { getCourseId } from "@/server/Courses";
 
 interface CoursePageWithChaptersProps {
-    courseId: string
-    chapterId: string
+    params: {
+        courseId: string
+        chapterId: string
+    }
 }
 
-export default async function CoursePageWithChapters({courseId, chapterId}: CoursePageWithChaptersProps) {
+export default async function CoursePageWithChapters({params}: CoursePageWithChaptersProps) {
   const session = await getSession()
-  const course = await getCourseId(courseId)
+  const course = await getCourseId(params.courseId)
 
     return (
     <section className="flex">
