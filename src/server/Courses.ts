@@ -422,3 +422,5 @@ export const enrollCourse = authenticatedAction
 
         revalidatePath(`/courses/${courseId}`)
     })
+
+

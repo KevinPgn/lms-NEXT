@@ -199,6 +199,7 @@ export const getChapterById = async ({chapterId}: {chapterId: string}) => {
     const chapter = await prisma.chapter.findUnique({
         where: { id: chapterId },
         select: {
+            id: true,
             title: true,
             content: true,
             videoUrl: true,
@@ -209,3 +210,35 @@ export const getChapterById = async ({chapterId}: {chapterId: string}) => {
 
     return chapter
 }
+
+
+export const markChapterAsCompleted = authenticatedAction
+  .schema(z.object({
+    chapterId: z.string(),
+    courseId: z.string()
+  }))
+  .action(async ({ ctx: { userId }, parsedInput: { chapterId, courseId } }) => {
+    if (!userId) throw new Error("User not authenticated");
+
+    const userProgress = await prisma.userProgress.upsert({
+      where: {
+        userId_courseId_chapterId: {
+          userId,
+          courseId,
+          chapterId
+        }
+      },
+      update: {
+        isCompleted: true
+      },
+      create: {
+        userId,
+        courseId,
+        chapterId,
+        isCompleted: true
+      }
+    });
+
+    revalidatePath(`/courses/${courseId}/chapters/${chapterId}`);
+    return userProgress;
+  });
