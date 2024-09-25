@@ -30,7 +30,7 @@ export default async function CoursePageWithChapters({params}: CoursePageWithCha
       <main className="flex-1">
         <Headers session={session}/>
 
-        <CourseSuivi chapterData={chapter} />
+        <CourseSuivi chapterData={chapter} isPurchased={course?.isPurchased ?? false} />
       </main>
     </section>    
   );
