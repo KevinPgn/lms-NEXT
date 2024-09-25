@@ -164,6 +164,15 @@ export const getPurchasesCourse = authenticatedAction
                         levels: true,
                         category: true,
                         authorId: true,
+                        chapters: {
+                            select: {
+                                id: true
+                            },
+                            orderBy: {
+                                createdAt: "asc"
+                            },
+                            take: 1
+                        },
                         ...(userId && {
                             userProgress: {
                                 where: {
@@ -193,11 +202,13 @@ export const getPurchasesCourse = authenticatedAction
             const totalChapters = purchase.course._count.chapters;
             const completed = purchase.course.userProgress.length;
             const progressPercentage = totalChapters > 0 ? (completed / totalChapters) * 100 : 0;
+            const firstChapterId = purchase.course.chapters[0]?.id
         
             return {
               ...purchase,
               isCompleted: completed > 0,
               progressPercentage,
+              firstChapterId
             }
           })
     })
