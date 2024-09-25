@@ -388,3 +388,27 @@ export const getCourseId = cache(async (courseId: string) => {
         isPurchased: course.purchases.length > 0
     } : null
 })
+
+
+export const enrollCourse = authenticatedAction
+    .schema(z.object({
+        courseId: z.string()
+    }))
+    .action(async ({ctx:{userId}, parsedInput:{courseId}}) => {
+        const course = await prisma.course.findUnique({
+            where: { id: courseId },
+        })
+
+        if (!course) {
+            throw new Error("Course not found")
+        }
+
+        await prisma.purchase.create({
+            data: {
+                userId: userId,
+                courseId: courseId
+            }
+        })
+
+        revalidatePath(`/courses/${courseId}`)
+    })
