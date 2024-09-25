@@ -130,8 +130,8 @@ export const getCourses = cache(async (category?: string, search?: string) => {
     return courses.map((course) => ({
         ...course,
         isPurchased: course.purchases.length > 0,
-        isCompleted: course.userProgress.length > 0,
-        progressPercentage: course.userProgress.length > 0 ? (course.userProgress.length / course._count.chapters) * 100 : 0
+        isCompleted: userId ? course.userProgress.length > 0 : false,
+        progressPercentage: userId ? (course.userProgress.length / course._count.chapters) * 100 : 0
     }))
 })
 

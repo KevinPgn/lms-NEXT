@@ -16,8 +16,8 @@ export default async function Home({searchParams}: {searchParams: {category: str
   const session = await getSession()
   const category = searchParams.category as string | undefined
   const search = searchParams.search as string | undefined
-  
   const courses = await getCourses(category, search)
+
 
   return (
     <section className="flex">

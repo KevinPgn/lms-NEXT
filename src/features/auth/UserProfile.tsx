@@ -2,7 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu"
 import { User, LogOut } from "lucide-react"
-
+import { signIn, signOut } from "next-auth/react"
 export const UserProfile = ({session}: {session: any}) => {
   return <>
     <DropdownMenu>
@@ -21,7 +21,7 @@ export const UserProfile = ({session}: {session: any}) => {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LogOut className="w-4 h-4 mr-2" />
-          Logout
+          <span onClick={() => signOut()}>Logout</span>
         </DropdownMenuItem> 
       </DropdownMenuContent>
     </DropdownMenu>

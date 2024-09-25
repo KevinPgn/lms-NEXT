@@ -22,7 +22,7 @@ export const Course = ({course, session}: {course: any, session: any}) => {
     </div>
 
     {/* If is purchased no show Price, if not show Price */}
-    {!course.isPurchased && session.user.id !== course.authorId ? (
+    {!course.isPurchased && session && session.user.id !== course.authorId ? (
         <p className="text-md mt-3 font-bold">${course.price}</p>
     ) : (
         <div className="mt-3">
